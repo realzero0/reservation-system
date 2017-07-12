@@ -4,3 +4,4 @@
 target
 .idea
 *.iml
+src/main/webapp/resources/js/node_modules
