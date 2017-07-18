@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.sql.*;
 
+import org.springframework.dao.*;
 import org.springframework.jdbc.core.*;
 import org.springframework.jdbc.core.namedparam.*;
 import org.springframework.jdbc.core.simple.*;
@@ -33,10 +34,16 @@ public class CategoryDao {
 		return jdbc.query(CategorySqls.SELECT_ALL, params, rowMapper);
 	}
 
-	public Category selectByName(String name) {
+	public Category selectById(Integer id) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("name", name);
-		return jdbc.queryForObject(CategorySqls.SELECT_BY_NAME, params, rowMapper);
+		params.put("id", id);
+		Category result;
+		try {
+			result = jdbc.queryForObject(CategorySqls.SELECT_BY_NAME, params, rowMapper);
+		} catch(EmptyResultDataAccessException e) {
+			return null;
+		}
+		return result;
 	}
 
 	public Integer update(Category category) {

@@ -5,13 +5,14 @@ import java.util.*;
 import jinyoung.reservation.domain.*;
 
 public interface CategoryService {
-	public Category get(String name);
+	public Category get(Integer id);
 
 	public Category addCategory(Category category);
 
-	public int delete(Integer id);
+	public Integer delete(Integer id);
 
-	public int update(Category category);
+	public Integer update(Category category);
 
 	public Collection<Category> getAll();
+
 }

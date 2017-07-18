@@ -30,7 +30,7 @@ public class AdminController {
 	public String create(@RequestParam(name = "name") String name, HttpServletRequest request)
 			throws UnsupportedEncodingException {
 		if (name == null || "".equals(name)) {
-			return "redirect:/admin/category";
+			return "false";
 		} else {
 			Category category = new Category();
 			category.setName(name);
@@ -38,11 +38,12 @@ public class AdminController {
 			return "redirect:/admin/category";
 		}
 	}
-
+	
+	/*
 	@GetMapping("/category/delete")
 	public String delete(@RequestParam(name = "id") Integer id, HttpServletRequest request) {
 		if (id == null) {
-			return "redirect:/admin/category";
+			return "false";
 		} else {
 			categoryService.delete(id);
 			return "redirect:/admin/category";
@@ -52,10 +53,10 @@ public class AdminController {
 	@GetMapping("/category/modify")
 	public String modify(@ModelAttribute Category category, HttpServletRequest request) {
 		if (category.getId() == null || category.getName() == null || "".equals(category.getName())) {
-			return "";
+			return "false";
 		} else {
 			categoryService.update(category);
 			return "redirect:/admin/category";
 		}
-	}
+	}*/
 }

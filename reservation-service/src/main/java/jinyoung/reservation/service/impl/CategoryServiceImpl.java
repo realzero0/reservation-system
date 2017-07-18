@@ -18,8 +18,8 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Category get(String name) {
-		return categoryDao.selectByName(name);
+	public Category get(Integer id) {
+		return categoryDao.selectById(id);
 	}
 
 	@Override
@@ -31,16 +31,19 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public int delete(Integer id) {
+	@Transactional(readOnly = false)
+	public Integer delete(Integer id) {
 		return categoryDao.delete(id);
 	}
 
 	@Override
-	public int update(Category category) {
+	@Transactional(readOnly = false)
+	public Integer update(Category category) {
 		return categoryDao.update(category);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Collection<Category> getAll() {
 		return categoryDao.selectAll();
 	}
