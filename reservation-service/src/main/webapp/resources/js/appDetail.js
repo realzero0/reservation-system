@@ -17,6 +17,9 @@
     $(".container_visual").find("img").css('width', '414');
     $(".container_visual").find("img").css('height', '414');
   })();
+
+
+  //지도부분
   var Location = (function() {
     var x;
     var y;
@@ -39,25 +42,16 @@
         position: myaddr,
         map: map
       });
-      // 마커 클릭 이벤트 처리
-      naver.maps.Event.addListener(marker, "click", function(e) {
-        if (infowindow.getMap()) {
-          infowindow.close();
-        } else {
-          infowindow.open(map, marker);
-        }
-      });
-      // 마크 클릭시 인포윈도우 오픈
-      var infowindow = new naver.maps.InfoWindow({
-        content: '<h4> [네이버 개발자센터]</h4><a href="https://developers.naver.com" target="_blank"><img src="https://developers.naver.com/inc/devcenter/images/nd_img.png"></a>'
+      $('.store_location').on('click', function(e) {
+        window.location.href = 'http://map.naver.com/index.nhn?query=' + urlencode(myaddress);
       });
 
-      infoWindow.close();
+
     });
   })();
 
   // 모듈 인스턴스화 필요
-  var PopupModule = (function() {
+  var Popup = (function() {
     $('.thumb').on('click', function() {
       var count = $(this).siblings('.img_count').text();
       var commentId = $(this).attr('id');

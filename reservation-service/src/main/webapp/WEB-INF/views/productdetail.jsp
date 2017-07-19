@@ -233,7 +233,7 @@
 					<!-- [D] 오시는길 외 다른 탭 선택 시 detail_location에 hide 추가 -->
 					<div class="detail_location hide">
 						<div class="box_store_info no_topline">
-							<a href="#" class="store_location" title="지도웹으로 연결">
+							<a href="http://map.naver.com/index.nhn?query=${productDto.placeStreet}" class="store_location" title="지도웹으로 연결">
 								<div id="store_map" data-address="${productDto.placeStreet}"
 									style="width: 374px; height: 340px;"></div> <span
 								class="img_border"></span> <span class="btn_map"><i
@@ -244,11 +244,13 @@
 								<div class="store_addr_wrap">
 									<span class="fn fn-pin2"></span>
 									<p class="store_addr store_addr_bold">${productDto.placeStreet}</p>
-									<p class="store_addr">
-										<span class="addr_old">지번</span> <span class="addr_old_detail"></span>
-									</p>
 									<c:if test="${!empty productDto.placeLot}">
-										<p class="store_addr addr_detail">${productDto.placeLot}</p>
+									<p class="store_addr">
+										<span class="addr_old">지번</span> <span class="addr_old_detail">${productDto.placeLot}</span>
+									</p>
+									</c:if>
+									<c:if test="${!empty productDto.placeName}">
+										<p class="store_addr addr_detail">${productDto.placeName}</p>
 									</c:if>
 								</div>
 								<div class="lst_store_info_wrap">
