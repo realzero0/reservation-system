@@ -1,32 +1,52 @@
-package jinyoung.reservation.domain;
+package jinyoung.reservation.dto;
 
 import java.util.*;
 
-public class File {
-	Integer id;
+public class ImageFormDto {
 	Integer userId;
+	Integer productId;
+	Integer fileId;
+	Integer type;
 	String fileName;
 	String saveFileName;
 	Long fileLength;
 	String contentType;
-	Integer deleteFlag;
+	String deleteFlag;
 	Date createDate;
 	Date modifyDate;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
+	
+	
 	public Integer getUserId() {
 		return userId;
 	}
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+
+	public Integer getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(Integer fileId) {
+		this.fileId = fileId;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
 	}
 
 	public String getFileName() {
@@ -61,11 +81,11 @@ public class File {
 		this.contentType = contentType;
 	}
 
-	public Integer getDeleteFlag() {
+	public String getDeleteFlag() {
 		return deleteFlag;
 	}
 
-	public void setDeleteFlag(Integer deleteFlag) {
+	public void setDeleteFlag(String deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
 

@@ -15,7 +15,7 @@ import jinyoung.reservation.service.*;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-
+	// 카테고리 설정
 	@Autowired
 	private CategoryService categoryService;
 
@@ -39,24 +39,6 @@ public class AdminController {
 		}
 	}
 	
-	/*
-	@GetMapping("/category/delete")
-	public String delete(@RequestParam(name = "id") Integer id, HttpServletRequest request) {
-		if (id == null) {
-			return "false";
-		} else {
-			categoryService.delete(id);
-			return "redirect:/admin/category";
-		}
-	}
+	//리뷰 설정
 	
-	@GetMapping("/category/modify")
-	public String modify(@ModelAttribute Category category, HttpServletRequest request) {
-		if (category.getId() == null || category.getName() == null || "".equals(category.getName())) {
-			return "false";
-		} else {
-			categoryService.update(category);
-			return "redirect:/admin/category";
-		}
-	}*/
 }

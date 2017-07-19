@@ -7,8 +7,7 @@ public class ProductDto {
 	String description;
 	String event;
 	String content;
-	String fileName;
-	String saveFileName;
+	Integer fileId;
 	String placeName;
 	String placeLot;
 	String placeStreet;
@@ -63,22 +62,13 @@ public class ProductDto {
 		this.content = content;
 	}
 
-	public String getFileName() {
-		return fileName;
+	public Integer getFileId() {
+		return fileId;
 	}
 
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setFileId(Integer fileId) {
+		this.fileId = fileId;
 	}
-
-	public String getSaveFileName() {
-		return saveFileName;
-	}
-
-	public void setSaveFileName(String saveFileName) {
-		this.saveFileName = saveFileName;
-	}
-
 
 	public String getPlaceName() {
 		return placeName;

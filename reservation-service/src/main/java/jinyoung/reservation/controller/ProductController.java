@@ -13,10 +13,10 @@ import jinyoung.reservation.service.*;
 public class ProductController {
 
 	@Autowired
-	private ProductDtoService productDtoService;
+	private ProductService productDtoService;
 	
 	@Autowired
-	private ProductImageDtoService productImageDtoService;
+	private FileService productImageDtoService;
 
 	@GetMapping("/{productId}")
 	public ProductDto selectById(@PathVariable Integer productId) {
@@ -24,8 +24,8 @@ public class ProductController {
 	}
 	
 	@GetMapping("/{productId}/images")
-	public Collection<ProductImageDto> selectImagesById(@PathVariable Integer productId) {
-		return productImageDtoService.getByProId(productId);
+	public Collection<ImageDto> selectImagesById(@PathVariable Integer productId) {
+		return productImageDtoService.getImagesByProId(productId);
 	}
 	
 	@GetMapping("/cate/{categoryId}/page/{page}")
