@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 
+
 <head>
 <jsp:include page="include/mainTitle.jsp" flush="false" />
 <link href="/resources/css/style.css" rel="stylesheet">

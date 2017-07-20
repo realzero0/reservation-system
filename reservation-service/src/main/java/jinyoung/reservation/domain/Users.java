@@ -3,7 +3,7 @@ package jinyoung.reservation.domain;
 import java.util.*;
 
 public class Users {
-	Integer id;
+	Long id;
 	String username;
 	String email;
 	String tel;
@@ -15,10 +15,10 @@ public class Users {
 	Date createDate;
 	Date modifyDate;
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getUsername() {

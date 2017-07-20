@@ -104,7 +104,7 @@
 										<div class="middle">
 											<div class="card_detail">
 												<em class="booking_number">No.0000000</em>
-												<h4 class="tit">서비스명/상품명</h4>
+												<h4 class="tit">${user.nickname}</h4>
 												<ul class="detail">
 													<li class="item"><span class="item_tit">일정</span> <em
 														class="item_dsc"> 2000.0.00.(월)2000.0.00.(일) </em></li>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
 import jinyoung.reservation.dao.*;
+import jinyoung.reservation.domain.*;
 import jinyoung.reservation.dto.*;
 import jinyoung.reservation.service.*;
 
@@ -15,6 +16,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	ProductDao productDao;
+
+	@Autowired
+	ProductPriceDao productPriceDao;
 
 	private static final Integer PAGING_COUNT = 4;
 
@@ -50,4 +54,10 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.countByCateId(categoryId);
 	}
 
+	@Override
+	public List<ProductPrice> getProductPricesByProductId(Integer productId) {
+		return productPriceDao.selectProductPricesByProductId(productId);
+	}
+	
+	
 }

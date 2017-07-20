@@ -18,6 +18,9 @@
     $(".container_visual").find("img").css('height', '414');
   })();
 
+  $('.bk_btn').on('click', function() {
+    window.location.href = window.location.href + '/reserve'
+  })
 
   //지도부분
   var Location = (function() {
@@ -102,7 +105,7 @@
                   }
                 }
 
-                if (dX > 100) {
+                if (dX > 60) {
                   curImage++;
                   if (curImage < count) {
                     $(this).find('img').attr('src', '/img/' + images[curImage]);
@@ -116,7 +119,7 @@
                   } else {
                     curImage = count - 1;
                   }
-                } else if (dX < -76) {
+                } else if (dX < -36) {
                   curImage--;
                   if (curImage >= 0) {
                     $(this).find('img').attr('src', '/img/' + images[curImage]);

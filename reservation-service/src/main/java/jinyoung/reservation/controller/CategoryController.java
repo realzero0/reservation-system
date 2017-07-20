@@ -12,7 +12,7 @@ import jinyoung.reservation.service.*;
 @RestController
 @RequestMapping("api/categories")
 public class CategoryController {
-
+	
 	@Autowired
 	private CategoryService categoryService;
 
