@@ -60,7 +60,12 @@ public class ReservationUserCommentServiceImpl implements ReservationUserComment
 		}
 		for (CommentReadingDto comment : comments) {
 			String username = comment.getUsername();
-			String subName = username.substring(0, 4);
+			String subName;
+			if(username.length() > 4) {
+				subName = username.substring(0, 4);	
+			} else {
+				subName = username;
+			}
 			comment.setUsername(subName);
 			Collection<ReservationUserCommentImage> commentImages = commentImageDao.getByComId(comment.getCommentId());
 			for (ReservationUserCommentImage commentImage : commentImages) {
@@ -77,6 +82,7 @@ public class ReservationUserCommentServiceImpl implements ReservationUserComment
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Integer getCountByProId(Integer productId) {
 		return commentDao.selectCountByProId(productId);
 	}

@@ -50,7 +50,7 @@ public class ReservationUserCommentDao {
 		params.put("productId", productId);
 		return jdbc.queryForObject(ReservationUserCommentSqls.SELECT_COUNT_BY_PRO_ID, params, Integer.class);
 	}
-	
+
 	public Collection<CommentReadingDto> selectCommentsByProId(Integer productId, Integer page, Integer count) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("productId", productId);
@@ -58,4 +58,18 @@ public class ReservationUserCommentDao {
 		params.put("count", count);
 		return jdbc.query(ReservationUserCommentSqls.SELECT_COMMENTS_BY_PRO_ID, params, commentRowMapper);
 	}
+
+	public ReservationUserComment selectCommentByUserIdAndProductId(Integer productId, Long userId) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("productId", productId);
+		params.put("userId", userId);
+		ReservationUserComment result;
+		try {
+			result = jdbc.queryForObject(ReservationUserCommentSqls.SELECT_COMMENT_BY_USER_ID_AND_PRODUCT_ID, params, rowMapper);
+		} catch (Exception e) {
+			return null;
+		}
+		return result;
+	}
+
 }

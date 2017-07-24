@@ -15,15 +15,17 @@ import jinyoung.reservation.service.*;
 @Controller
 @RequestMapping("/exhibition")
 public class ReserveController {
-	
+
 	@Autowired
 	private ProductService productDtoService;
-	
-	
+
+	@Autowired
+	private ReservationInfoService reservationInfoService;
+
 	@GetMapping("/{productId}/reserve")
 	public String reserveProduct(@PathVariable Integer productId, HttpServletRequest request) {
 		if (request.getSession().getAttribute("user") != null) {
-//			request.getSession().setAttribute("user", null);
+			// request.getSession().setAttribute("user", null);
 			ProductDto productDto = productDtoService.getByProId(productId);
 			List<ProductPrice> prices = productDtoService.getProductPricesByProductId(productId);
 			request.setAttribute("product", productDto);
@@ -34,4 +36,13 @@ public class ReserveController {
 			return "redirect:/login";
 		}
 	}
+
+	@PostMapping("/{productId}/reserve")
+	public String reserve(@PathVariable Integer productId, @ModelAttribute ReservationInfo reservationInfo) {
+		reservationInfoService.addReservationInfo(reservationInfo);
+		return "redirect:/"; // 성공 부분
+	}
+
+	
+
 }

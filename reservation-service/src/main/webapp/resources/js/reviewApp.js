@@ -3,10 +3,10 @@
 
   //이미지 슬라이드 부분
   //드래그 방지
-         $(document).on("dragstart",function(e){
-             console.log("d"+e);
-             return false;
-         });
+  $(document).on("dragstart", function(e) {
+    console.log("d" + e);
+    return false;
+  });
 
   $('.thumb').on('click', function() {
     var count = $(this).siblings('.img_count').text();
@@ -48,12 +48,12 @@
               }
               var dX = e.clientX - curX;
               if (dX > 0) {
-                if(curImage === count - 1) {
+                if (curImage === count - 1) {
                   return;
                 }
               }
-              if(dX < 24) {
-                if(curImage === 0) {
+              if (dX < 24) {
+                if (curImage === 0) {
                   return;
                 }
               }
@@ -62,7 +62,7 @@
                 curImage++;
                 if (curImage < count) {
                   $(this).find('img').attr('src', '/img/' + images[curImage]);
-                  countElement.text((curImage + 1)+ ' / ' + count);
+                  countElement.text((curImage + 1) + ' / ' + count);
                   isDragging = false;
                   isChanged = true;
                   findElement.css({
@@ -76,7 +76,7 @@
                 curImage--;
                 if (curImage >= 0) {
                   $(this).find('img').attr('src', '/img/' + images[curImage]);
-                  countElement.text((curImage + 1)+ ' / ' + count);
+                  countElement.text((curImage + 1) + ' / ' + count);
                   isDragging = false;
                   isChanged = true;
                   findElement.css({

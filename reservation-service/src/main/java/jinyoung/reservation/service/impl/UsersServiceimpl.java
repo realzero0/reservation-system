@@ -6,6 +6,7 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.core.type.*;
@@ -22,16 +23,19 @@ public class UsersServiceimpl implements UsersService {
 	UsersDao usersDao;
 	
 	@Override
+	@Transactional(readOnly = false)
 	public Integer addUser(Users user) {
 		return usersDao.insert(user);
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public Collection<Users> getAll() {
 		return usersDao.selectAll();
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public Users getUserById(Long userId) {
 		return usersDao.selectById(userId);
 	}
@@ -87,6 +91,7 @@ public class UsersServiceimpl implements UsersService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Users getUserBySnsId(String userSnsId) {
 		return usersDao.selectBySnsId(userSnsId);
 	}

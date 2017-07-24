@@ -16,7 +16,6 @@ import jinyoung.reservation.domain.*;
 import jinyoung.reservation.dto.*;
 import jinyoung.reservation.service.*;
 
-
 //임시 컨트롤러, 나중에 수정 필요
 @Controller
 @RequestMapping("/review")
@@ -29,6 +28,8 @@ public class ReviewController {
 	@Autowired
 	UsersService usersService;
 
+	@Autowired
+	ReservationInfoService reservationInfoService;
 
 	@GetMapping
 	public String review(HttpServletRequest request) {
@@ -44,8 +45,21 @@ public class ReviewController {
 	}
 
 	@GetMapping("/write")
-	public String reviewWrite() {
-		return "reviewWrite";
+	public String reviewWrite(@RequestParam(name = "bookingNumber") Integer bookingNumber, HttpServletRequest request)
+			throws Exception {
+		if (request.getSession().getAttribute("user") != null) {
+			Users user = (Users) request.getSession().getAttribute("user");
+			BookedListDto bookedList = reservationInfoService.getBookedListByBookingNumber(bookingNumber);
+			if (bookedList.getUserId().longValue() == user.getId().longValue() && bookedList.getCommentId() == null) {
+				request.setAttribute("user", user);
+				request.setAttribute("bookedList", bookedList);
+				return "reviewWrite";
+			} else {
+				throw new Exception();
+			}
+		} else {
+			throw new Exception();
+		}
 	}
 
 	@PostMapping

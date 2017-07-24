@@ -38,7 +38,7 @@
 						title="이전 화면으로 이동"> <i class="fn fn-backward1"></i>
 					</a>
 					<h2>
-						<span class="title">${product.name}</span>
+						<span class="title" data-product-id="${product.id}">${product.name}</span>
 					</h2>
 				</div>
 				<div class="group_visual">
@@ -78,13 +78,13 @@
 				<div class="section_booking_ticket">
 					<div class="ticket_body">
 						<c:forEach var="price" items="${prices}">
-							<div class="qty" data-id="${price.id}" data-price="${price.price}" data-price-type="${price.priceType}">
+							<div class="qty" data-price="${price.price}">
 								<div class="count_control">
 									<!-- [D] 수량이 최소 값이 일때 ico_minus3, count_control_input에 disabled 각각 추가, 수량이 최대 값일 때는 ico_plus3에 disabled 추가 -->
 									<div class="clearfix">
 										<a href="#"
 											class="btn_plus_minus spr_book2 ico_minus3 disabled"
-											title="빼기"> </a> <input type="tel"
+											title="빼기"> </a> <input type="tel" data-price-type="${price.priceType}"
 											class="count_control_input disabled" value="0" readonly
 											title="수량"> <a href="#"
 											class="btn_plus_minus spr_book2 ico_plus3" title="더하기"> </a>
@@ -116,7 +116,7 @@
 						</c:forEach>
 						
 				</div>
-				<div class="section_booking_form">
+				<div class="section_booking_form" data-user-id="${sessionScope.user.id}">
 					<div class="booking_form_wrap">
 						<div class="form_wrap">
 							<h3 class="out_tit">예매자 정보</h3>

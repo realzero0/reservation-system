@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -26,10 +27,10 @@
 			<div class="ct_wrap">
 				<div class="top_title review_header">
 					<a href="#" class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i> </a>
-					<h2><span class="title">클림트 인사이드</span></h2>
+					<h2><span class="title">${bookedList.productName}</span></h2>
 				</div>
 				<!-- 리뷰 별점 -->
-				<div class="write_act">
+				<div class="write_act" data-user-id="${bookedList.userId}" data-product-id="${bookedList.productId}">
 					<p class="title_star">별점과 이용경험을 남겨주세요.</p>
 					<div class="review_rating rating_point">
 						<div class="rating">
@@ -87,41 +88,6 @@
 					<div class="review_photos review_photos_write">
 						<div class="item_preview_thumbs">
 							<ul class="lst_thumb">
-								<li class="item">
-									<a href="#" class="anchor">
-										<span class="spr_book ico_del">삭제</span>
-									</a>
-									<img src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300" width="130" alt="" class="item_thumb">
-									<span class="img_border"></span>
-								</li>
-								<li class="item">
-									<a href="#" class="anchor">
-										<span class="spr_book ico_del">삭제</span>
-									</a>
-									<img src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300" width="130" alt="" class="item_thumb">
-									<span class="img_border"></span>
-								</li>
-								<li class="item">
-									<a href="#" class="anchor">
-										<span class="spr_book ico_del">삭제</span>
-									</a>
-									<img src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300" width="130" alt="" class="item_thumb">
-									<span class="img_border"></span>
-								</li>
-								<li class="item">
-									<a href="#" class="anchor">
-										<span class="spr_book ico_del">삭제</span>
-									</a>
-									<img src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300" width="130" alt="" class="item_thumb">
-									<span class="img_border"></span>
-								</li>
-								<li class="item">
-									<a href="#" class="anchor">
-										<span class="spr_book ico_del">삭제</span>
-									</a>
-									<img src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300" width="130" alt="" class="item_thumb">
-									<span class="img_border"></span>
-								</li>
 							</ul>
 						</div>
 					</div>
@@ -148,5 +114,9 @@
 		</div>
 	</footer>
 </body>
-
+<jsp:include page="include/handlebars-templates.jsp" flush="false" />
+<script	src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/resources/js/reviewWriteApp.js"></script>
 </html>

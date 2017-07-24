@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script	src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script
+	src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script id="item-template" type="text/x-handlebars-template">
 <li class="item"><a href="/exhibition/{{id}}"
 	class="item_book">
@@ -42,5 +43,13 @@
 			</div>
 		</div>
 	</div>
+</li>
+</script>
+<script id="review-thumnail-template" type="text/x-handlebars-template">
+<li class="item" data-file-num="{{fileNum}}"><a href="#" class="anchor"> <span
+		class="spr_book ico_del">삭제</span>
+</a> <img
+	src="{{fileLocation}}"
+	width="130" alt="" class="item_thumb"> <span class="img_border"></span>
 </li>
 </script>
