@@ -50,7 +50,8 @@ public class ReviewController {
 		if (request.getSession().getAttribute("user") != null) {
 			Users user = (Users) request.getSession().getAttribute("user");
 			BookedListDto bookedList = reservationInfoService.getBookedListByBookingNumber(bookingNumber);
-			if (bookedList.getUserId().longValue() == user.getId().longValue() && bookedList.getCommentId() == null) {
+//			if (bookedList.getUserId().longValue() == user.getId().longValue() && bookedList.getCommentId() == null) {
+			if(bookedList.getUserId().longValue() == user.getId().longValue()) {
 				request.setAttribute("user", user);
 				request.setAttribute("bookedList", bookedList);
 				return "reviewWrite";

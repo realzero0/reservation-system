@@ -240,7 +240,7 @@
 																	<span class="unit">원</span>
 																</em>
 															</div>
-															<c:if test="${empty bookedList.commentId}">
+															<c:if test="${!empty bookedList.commentId}">
 																<div class="booking_cancel">
 																	<!--  리뷰 남겼는지 안남겼는지 확인 -->
 																	<button class="btn">
