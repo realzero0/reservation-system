@@ -11,6 +11,7 @@ import javax.servlet.http.*;
 import org.json.simple.*;
 import org.json.simple.parser.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.context.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,11 +19,15 @@ import jinyoung.reservation.domain.*;
 import jinyoung.reservation.service.*;
 
 @Controller
+@PropertySource("classpath:/application.properties")
 @RequestMapping("/login")
 public class LoginController {
 	private static final String COLLBACK_URL = URLEncoder.encode("http://localhost:8080/login/oauth2callback");
 	private static final String NAVER_OAUTH_CLIENT_ID = "KGCa149JUmPYQhSpiWSn";
-	private static final String NAVER_OAUTH_CLIENT_SECRET = "lreRfyAtAw";
+	
+	@Value("${naver.login.client.secret}")
+	private String NAVER_OAUTH_CLIENT_SECRET;
+	
 	private static final String REQUEST_URL = "https://nid.naver.com/oauth2.0/authorize?client_id="
 			+ NAVER_OAUTH_CLIENT_ID + "&response_type=code&redirect_uri=" + COLLBACK_URL + "&state=";
 	private static final String USER_PROFILE_URL = "https://openapi.naver.com/v1/nid/me";
