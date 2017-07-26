@@ -19,20 +19,22 @@ public class ProductDao {
 	public ProductDao(DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 	}
-
-	public Collection<ProductDto> selectAll(Integer page) {
+	
+	public List<ProductDto> selectProductsOfAllCategoryInPage(Integer page) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("page", page);
-		return jdbc.query(ProductSqls.SELECT_ALL_IN_PAGE, params, rowMapper);
+		return jdbc.query(ProductSqls.SELECT_PRODUCTS_OF_ALL_CATEGORY_IN_PAGE, params, rowMapper);
 	}
-
+	
+	
 	public Collection<ProductDto> selectByCateId(Integer categoryId, Integer page) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("categoryId", categoryId);
 		params.put("page", page);
 		return jdbc.query(ProductSqls.SELECT_BY_CATE_ID_IN_PAGE, params, rowMapper);
 	}
-
+	
+	
 	public Integer countAll() {
 		Map<String, Object> params = Collections.emptyMap();
 		return jdbc.queryForObject(ProductSqls.COUNT_ALL, params, Integer.class);

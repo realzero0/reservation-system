@@ -5,10 +5,9 @@ public class ProductSqls {
 			+ "FROM product, product_detail, product_image, file, display_info "
 			+ "where product.id=product_detail.product_id and display_info.product_id = product.id and product.id=product_image.product_id and product_image.file_id=file.id and "
 			+ "product.id = :productId group by product.id";
-	public static final String SELECT_ALL_IN_PAGE = "SELECT product.id, product.category_id, name, description, event, content, file.id file_id, place_name, place_lot, place_street, tel, homepage "
-			+ "FROM product, product_detail, product_image, file, display_info "
-			+ "where product.id=product_detail.product_id and display_info.product_id = product.id and product.id=product_image.product_id and product_image.file_id=file.id "
-			+ "group by product.id limit :page, 4";
+	public static final String SELECT_PRODUCTS_OF_ALL_CATEGORY_IN_PAGE = "SELECT product.id, category_id, description, sales_start, sales_end, sales_flag, event, content\n"
+			+ "FROM reservation.product, reservation.product_detail\n" + "where product.id = product_detail.product_id\n" + "limit :page, 4";
+	
 	public static final String SELECT_BY_CATE_ID_IN_PAGE = "SELECT product.id, product.category_id, name, description, event, content, file.id file_id, place_name, place_lot, place_street, tel, homepage "
 			+ "FROM product, product_detail, product_image, file, display_info where product.id=product_detail.product_id and display_info.product_id = product.id and product.id=product_image.product_id and product_image.file_id=file.id and "
 			+ "product.category_id = :categoryId group by product.id limit :page, 4";

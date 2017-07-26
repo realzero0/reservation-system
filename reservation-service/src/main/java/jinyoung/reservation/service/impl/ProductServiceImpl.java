@@ -19,6 +19,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	ProductPriceDao productPriceDao;
+	
+	@Autowired
+	ProductImageDao productImageDao;
 
 	private static final Integer PAGING_COUNT = 4;
 
@@ -37,9 +40,14 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Collection<ProductDto> getAll(Integer page) {
+	public List<ProductDto> getAll(Integer page) {
 		page *= PAGING_COUNT;
-		return productDao.selectAll(page);
+		List<ProductDto> productList = productDao.selectProductsOfAllCategoryInPage(page);
+		for(int i = 0; i<productList.size(); i++) {
+			Integer productId = productList.get(i).getId();
+			productList.get(i).setFileId(productImageDao.selectAFileIdByProductId(productId));
+		}
+		return productList;
 	}
 
 	@Override

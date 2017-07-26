@@ -9,4 +9,5 @@ public interface FileService {
 	public Collection<Integer> getImagesByCommentId(Integer commentId);
 	public Collection<ImageDto> getImagesByProId(Integer productId);
 	public ImageDto getImageByFileId(Integer fileId);
+	public String getBaseDir();
 }

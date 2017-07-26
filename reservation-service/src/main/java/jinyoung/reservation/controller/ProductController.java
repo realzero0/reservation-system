@@ -13,14 +13,14 @@ import jinyoung.reservation.service.*;
 public class ProductController {
 
 	@Autowired
-	private ProductService productDtoService;
+	private ProductService productService;
 	
 	@Autowired
 	private FileService productImageDtoService;
 
 	@GetMapping("/{productId}")
 	public ProductDto selectById(@PathVariable Integer productId) {
-		return productDtoService.getByProId(productId);
+		return productService.getByProId(productId);
 	}
 	
 	@GetMapping("/{productId}/images")
@@ -31,18 +31,18 @@ public class ProductController {
 	@GetMapping("/cate/{categoryId}/page/{page}")
 	public Collection<ProductDto> selectByCateId(@PathVariable Integer categoryId, @PathVariable Integer page) {
 		if(categoryId == 1) {
-			return productDtoService.getAll(page);
+			return productService.getAll(page);
 		} else {
-			return productDtoService.getByCateId(categoryId, page);
+			return productService.getByCateId(categoryId, page);
 		}
 	}
 
 	@GetMapping("/count/{categoryId}")
 	public Integer countByCateId(@PathVariable Integer categoryId) {
 		if(categoryId == 1) {
-			return productDtoService.getCountAll();
+			return productService.getCountAll();
 		} else {
-			return productDtoService.getCountByCateId(categoryId);
+			return productService.getCountByCateId(categoryId);
 		}
 	}
 }

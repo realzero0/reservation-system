@@ -17,11 +17,12 @@ import jinyoung.reservation.service.*;
 @Controller
 @RequestMapping("/poster")
 public class PosterFileController {
-	private String baseDir = "c:" + File.separator + "boost" + File.separator + "storage" + File.separator;
+	
 	
 	@Autowired
 	FileService fileService;
 	
+	private String baseDir = fileService.getBaseDir();
 	
 	@GetMapping
 	public String posterUpload(HttpServletRequest request) {
@@ -30,7 +31,7 @@ public class PosterFileController {
 
 	@PostMapping
 	public String create(@RequestParam("productid") Integer productId, @RequestParam("file") MultipartFile[] files) {
-
+		baseDir = baseDir.replace("/", File.separator);
 		if (files != null && files.length > 0) {
 
 			// windows 사용자라면 "c:\boost\storage\년도\월\일" 형태의 문자열을 구한다.

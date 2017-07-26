@@ -1,10 +1,15 @@
 package jinyoung.reservation.dto;
 
+import java.util.*;
+
 public class ProductDto {
 	Integer id;
 	Integer categoryId;
 	String name;
 	String description;
+	Date salesStart;
+	Date salesEnd;
+	Integer salesFlag;
 	String event;
 	String content;
 	Integer fileId;
@@ -28,6 +33,30 @@ public class ProductDto {
 
 	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
+	}
+
+	public Date getSalesStart() {
+		return salesStart;
+	}
+
+	public void setSalesStart(Date salesStart) {
+		this.salesStart = salesStart;
+	}
+
+	public Date getSalesEnd() {
+		return salesEnd;
+	}
+
+	public void setSalesEnd(Date salesEnd) {
+		this.salesEnd = salesEnd;
+	}
+
+	public Integer getSalesFlag() {
+		return salesFlag;
+	}
+
+	public void setSalesFlag(Integer salesFlag) {
+		this.salesFlag = salesFlag;
 	}
 
 	public String getName() {
