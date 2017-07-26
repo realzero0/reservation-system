@@ -3,7 +3,6 @@ package jinyoung.reservation.service.impl;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.context.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
@@ -13,7 +12,6 @@ import jinyoung.reservation.dto.*;
 import jinyoung.reservation.service.*;
 
 @Service
-@PropertySource("classpath:/application.properties")
 public class FileServiceImpl implements FileService {
 	
 	@Value("${app.file.basedir}")

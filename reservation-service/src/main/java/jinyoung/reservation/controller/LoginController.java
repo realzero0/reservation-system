@@ -2,7 +2,6 @@ package jinyoung.reservation.controller;
 
 import java.io.*;
 import java.math.*;
-import java.net.*;
 import java.security.*;
 import java.util.*;
 
@@ -11,7 +10,6 @@ import javax.servlet.http.*;
 import org.json.simple.*;
 import org.json.simple.parser.*;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.context.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,12 +17,12 @@ import jinyoung.reservation.domain.*;
 import jinyoung.reservation.service.*;
 
 @Controller
-@PropertySource("classpath:/application.properties")
 @RequestMapping("/login")
 public class LoginController {
-	@Value("${app.domain.url}")
-	private static String DOMAIN_URL;
-	private static final String COLLBACK_URL = URLEncoder.encode(DOMAIN_URL + "/login/oauth2callback");
+	
+	@Value("${naver.login.callback.url}")
+	private static String COLLBACK_URL;
+	
 	private static final String NAVER_OAUTH_CLIENT_ID = "KGCa149JUmPYQhSpiWSn";
 	
 	@Value("${naver.login.client.secret}")
