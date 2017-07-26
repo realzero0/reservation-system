@@ -4,9 +4,9 @@
   // 페이지 로딩 시 읽어옴
 
   $(document).ready(function() {
-    category.initProducts();
+    CategoryModule.initProducts();
   });
-    
+
   //header 영역
   /*
   var headModule = (function() {
@@ -118,7 +118,7 @@
   imageRoller.imgRolling('container_visual');
 
   // 카테고리 클릭
-  var category = (function() {
+  var CategoryModule = (function() {
     var categories = new Array();
     var currentCate;
     var page = 0;
@@ -128,8 +128,8 @@
 
     var clickCategory = (function() {
       var currentUrl = location.href;
-      var anchor = $('.anchor');
-      anchor.click(function() {
+      var $anchor = $('.anchor');
+      $anchor.click(function() {
         if (!($(this).hasClass('active'))) {
           var subUrl = currentUrl.split('?');
           subUrl[0] += '?categoryName=' + $(this).find('span').html();
@@ -139,11 +139,13 @@
         }
       });
     })();
+
     (function() {
       $('.section_event_tab .item').each(function() {
         categories[$(this).find('span').html()] = $(this).data('category');
       });
     })();
+
     var initProducts = function() {
       page = 0;
       var categoryParam = getParameters('categoryName');
@@ -165,11 +167,27 @@
         url: '/api/products/cate/' + categoryId + '/page/' + productPage,
         contentType: 'application/json',
         success: function(res) {
-          for (var i = 0; i < res.length; i++) {
-            addExhibition(itemTemplate(res[i]), i);
-          }
+          productUlAppendMap(res);
+          //addExhibition을 대신하는 코드, 한번에 append 진행
         }
       });
+    }
+    function productUlAppendMap(res){
+      var ulLeft = [];
+      var ulRight = [];
+
+      for(var i = 0; i < res.length; i++){
+        if(i%2 == 0){
+          ulLeft[i/2] = itemTemplate(res[i]);
+        } else{
+          ulRight[parseInt(i/2)] = itemTemplate(res[i]);
+        }
+      }
+      
+      ulLeft = ulLeft.join('');
+      ulRight = ulRight.join('');
+      $('.wrap_event_box > ul:first-child').append(ulLeft);
+      $('.wrap_event_box > ul:first-child + ul').append(ulRight);
     }
 
     var countProductsByCate = function(categoryId) {
@@ -181,14 +199,6 @@
           $('span.pink').html(productCount + '개');
         }
       });
-    }
-
-    var addExhibition = function(data, i) {
-      if (i % 2 === 0) {
-        $('.wrap_event_box > ul:first-child').append(data);
-      } else {
-        $('.wrap_event_box > ul:first-child + ul').append(data);
-      }
     }
 
     //더보기
