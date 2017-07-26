@@ -29,6 +29,11 @@ public class DbConfig {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(driverClassName);
 		dataSource.setUrl(url);
+		dataSource.setMaxTotal(10);
+		dataSource.setInitialSize(10);
+		dataSource.setMaxWaitMillis(60000);
+		dataSource.setMaxIdle(1);
+		dataSource.setMaxTotal(10);
 		dataSource.setUsername(username);
 		dataSource.setPassword(password);
 		return dataSource;
