@@ -27,7 +27,7 @@ public class ProductDao {
 	}
 	
 	
-	public Collection<ProductDto> selectByCateId(Integer categoryId, Integer page) {
+	public List<ProductDto> selectByCateId(Integer categoryId, Integer page) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("categoryId", categoryId);
 		params.put("page", page);
@@ -40,13 +40,13 @@ public class ProductDao {
 		return jdbc.queryForObject(ProductSqls.COUNT_ALL, params, Integer.class);
 	}
 
-	public Integer countByCateId(Integer categoryId) {
+	public Integer countByCategoryId(Integer categoryId) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("categoryId", categoryId);
 		return jdbc.queryForObject(ProductSqls.COUNT_BY_CATE_ID, params, Integer.class);
 	}
 
-	public ProductDto selectByProId(Integer productId) {
+	public ProductDto selectByProductId(Integer productId) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("productId", productId);
 		ProductDto result;

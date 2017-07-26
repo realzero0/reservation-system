@@ -26,7 +26,7 @@ public class ReserveController {
 	public String reserveProduct(@PathVariable Integer productId, HttpServletRequest request) {
 		if (request.getSession().getAttribute("user") != null) {
 			// request.getSession().setAttribute("user", null);
-			ProductDto productDto = productDtoService.getByProId(productId);
+			ProductDto productDto = productDtoService.getByProductId(productId);
 			List<ProductPrice> prices = productDtoService.getProductPricesByProductId(productId);
 			request.setAttribute("product", productDto);
 			request.setAttribute("prices", prices);

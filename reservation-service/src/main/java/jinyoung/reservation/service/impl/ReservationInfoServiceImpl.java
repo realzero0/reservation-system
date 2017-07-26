@@ -49,7 +49,7 @@ public class ReservationInfoServiceImpl implements ReservationInfoService {
 		List<BookedListDto> bookedLists = new LinkedList<>();
 		for (ReservationInfo info : reservationInfos) {
 			Integer productId = info.getProductId();
-			ProductDto product = productDao.selectByProId(productId);
+			ProductDto product = productDao.selectByProductId(productId);
 			List<ProductPrice> productPrices = productPriceDao.selectProductPricesByProductId(productId);
 			BookedListDto bookedList = new BookedListDto();
 			ReservationUserComment comment = commentDao.selectCommentByUserIdAndProductId(productId, userId);
@@ -102,7 +102,7 @@ public class ReservationInfoServiceImpl implements ReservationInfoService {
 	public BookedListDto getBookedListByBookingNumber(Integer bookingNumber) {
 		ReservationInfo info = reservationInfoDao.selectReservationInfoByBookingNumber(bookingNumber);
 		Integer productId = info.getProductId();
-		ProductDto product = productDao.selectByProId(productId);
+		ProductDto product = productDao.selectByProductId(productId);
 		List<ProductPrice> productPrices = productPriceDao.selectProductPricesByProductId(productId);
 		BookedListDto bookedList = new BookedListDto();
 		ReservationUserComment comment = commentDao.selectCommentByUserIdAndProductId(productId, info.getUserId());

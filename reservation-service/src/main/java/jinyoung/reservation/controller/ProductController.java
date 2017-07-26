@@ -20,7 +20,7 @@ public class ProductController {
 
 	@GetMapping("/{productId}")
 	public ProductDto selectById(@PathVariable Integer productId) {
-		return productService.getByProId(productId);
+		return productService.getByProductId(productId);
 	}
 	
 	@GetMapping("/{productId}/images")
@@ -33,7 +33,7 @@ public class ProductController {
 		if(categoryId == 1) {
 			return productService.getAll(page);
 		} else {
-			return productService.getByCateId(categoryId, page);
+			return productService.getByCategoryId(categoryId, page);
 		}
 	}
 

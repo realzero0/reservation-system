@@ -27,15 +27,22 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public ProductDto getByProId(Integer productId) {
-		return productDao.selectByProId(productId);
+	public ProductDto getByProductId(Integer productId) {
+		ProductDto product = productDao.selectByProductId(productId);
+		product.setFileId(productImageDao.selectAFileIdByProductId(productId));
+		return product;
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Collection<ProductDto> getByCateId(Integer categoryId, Integer page) {
+	public List<ProductDto> getByCategoryId(Integer categoryId, Integer page) {
 		page *= PAGING_COUNT;
-		return productDao.selectByCateId(categoryId, page);
+		List<ProductDto> productList = productDao.selectByCateId(categoryId, page);
+		for(int i = 0; i<productList.size(); i++) {
+			Integer productId = productList.get(i).getId();
+			productList.get(i).setFileId(productImageDao.selectAFileIdByProductId(productId));
+		}
+		return productList;
 	}
 
 	@Override
@@ -59,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@Transactional(readOnly = true)
 	public Integer getCountByCateId(Integer categoryId) {
-		return productDao.countByCateId(categoryId);
+		return productDao.countByCategoryId(categoryId);
 	}
 
 	@Override

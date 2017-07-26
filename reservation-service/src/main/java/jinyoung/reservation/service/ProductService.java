@@ -7,11 +7,11 @@ import jinyoung.reservation.dto.*;
 
 public interface ProductService {
 
-	public ProductDto getByProId(Integer productId);
+	public ProductDto getByProductId(Integer productId);
 
-	public Collection<ProductDto> getByCateId(Integer categoryId, Integer page);
+	public List<ProductDto> getByCategoryId(Integer categoryId, Integer page);
 
-	public Collection<ProductDto> getAll(Integer page);
+	public List<ProductDto> getAll(Integer page);
 
 	public Integer getCountAll();
 

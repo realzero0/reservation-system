@@ -37,7 +37,7 @@ public class MainConroller {
 
 	@GetMapping("/exhibition/{productId}")
 	public String getDetailPage(@PathVariable Integer productId, HttpServletRequest request) {
-		ProductDto productDto = productDtoService.getByProId(productId);
+		ProductDto productDto = productDtoService.getByProductId(productId);
 		Collection<ImageDto> productImages = productImageDtoService.getImagesByProId(productId);
 		Collection<CommentReadingDto> comments = commentService.getByCommentsProId(productId, 0, 3);
 		Integer avgScore = 0;
@@ -57,7 +57,7 @@ public class MainConroller {
 
 	@GetMapping("/exhibition/{productId}/reviews")
 	public String getReviewPage(@PathVariable Integer productId, HttpServletRequest request) {
-		ProductDto productDto = productDtoService.getByProId(productId);
+		ProductDto productDto = productDtoService.getByProductId(productId);
 		Collection<CommentReadingDto> comments = commentService.getByCommentsProId(productId, 0, 10);
 		Integer avgScore = (int) (commentService.getAvgScoreByProId(productId) * 100);
 		Integer commentCount = commentService.getCountByProId(productId);
