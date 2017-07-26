@@ -29,7 +29,7 @@ public class ReservationInfoServiceImpl implements ReservationInfoService {
 	@Override
 	@Transactional(readOnly = false)
 	public Integer addReservationInfo(ReservationInfo reservationInfo) {
-		reservationInfo.setReservationType(0); // 예약 신청중
+		reservationInfo.setReservationType(0);
 		reservationInfo.setCreateDate(new Date());
 		reservationInfo.setReservationDate(new Date());
 		return reservationInfoDao.insert(reservationInfo);
