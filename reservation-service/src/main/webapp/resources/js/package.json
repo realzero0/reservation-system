@@ -18,6 +18,7 @@
   "homepage": "https://github.com/realzero0/reservation-system#readme",
   "dependencies": {
     "handlebars": "^4.0.10",
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "jquery-lazyload": "^1.9.7"
   }
 }
