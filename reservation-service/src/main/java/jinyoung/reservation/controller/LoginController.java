@@ -27,7 +27,7 @@ public class LoginController {
 	private static final String NAVER_OAUTH_CLIENT_ID = "KGCa149JUmPYQhSpiWSn";
 	
 	@Value("${naver.login.client.secret}")
-	private static String NAVER_OAUTH_CLIENT_SECRET;
+	private String NAVER_OAUTH_CLIENT_SECRET;
 	
 	private static final String REQUEST_URL = "https://nid.naver.com/oauth2.0/authorize?client_id="
 			+ NAVER_OAUTH_CLIENT_ID + "&response_type=code&redirect_uri=";
