@@ -130,10 +130,8 @@
       var anchor = $('.anchor');
       anchor.click(function() {
         if (!($(this).hasClass('active'))) {
-          if (currentUrl !== 'http://localhost:8080/') {
-            currentUrl = 'http://localhost:8080/';
-          }
-          currentUrl += '?categoryName=' + $(this).find('span').html();
+          var subUrl = currentUrl.split('?');
+          subUrl[0] += '?categoryName=' + $(this).find('span').html();
           history.pushState(null, null, currentUrl);
           $('.lst_event_box').empty();
           initProducts();
