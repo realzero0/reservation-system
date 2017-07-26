@@ -65,7 +65,7 @@
 													<div class="thumb_area">
 														<a href="#" id="${comment.commentId}" class="thumb" title="이미지 크게 보기"> <img
 															width="90" height="90" class="img_vertical_top"
-															src="/img/${comment.fileIds[0]}" alt="리뷰이미지">
+															src="http://220.230.122.151/img/${comment.fileIds[0]}" alt="리뷰이미지">
 														</a> <span class="img_count">${fn:length(comment.fileIds)}</span>
 													</div>
 												</c:if>

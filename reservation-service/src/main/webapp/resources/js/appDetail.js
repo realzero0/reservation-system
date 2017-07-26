@@ -79,7 +79,7 @@
                 if (dX > 60) {
                   curImage++;
                   if (curImage < count) {
-                    $(this).find('img').attr('http://http://220.230.122.151/src', '/img/' + images[curImage]);
+                    $(this).find('img').attr('src', 'http://220.230.122.151/img/' + images[curImage]);
                     countElement.text((curImage + 1) + ' / ' + count);
                     isDragging = false;
                     isChanged = true;
@@ -93,7 +93,7 @@
                 } else if (dX < -36) {
                   curImage--;
                   if (curImage >= 0) {
-                    $(this).find('img').attr('http://220.230.122.151/src', '/img/' + images[curImage]);
+                    $(this).find('img').attr('src', 'http://220.230.122.151/img/' + images[curImage]);
                     countElement.text((curImage + 1) + ' / ' + count);
                     isDragging = false;
                     isChanged = true;
