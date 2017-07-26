@@ -132,7 +132,7 @@
         if (!($(this).hasClass('active'))) {
           var subUrl = currentUrl.split('?');
           subUrl[0] += '?categoryName=' + $(this).find('span').html();
-          history.pushState(null, null, currentUrl);
+          history.pushState(null, null, subUrl[0]);
           $('.lst_event_box').empty();
           initProducts();
         }
