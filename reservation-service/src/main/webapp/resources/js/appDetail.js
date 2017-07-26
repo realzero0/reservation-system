@@ -22,36 +22,7 @@
     window.location.href = window.location.href + '/reserve'
   })
 
-  //지도부분
-  var Location = (function() {
-    var x;
-    var y;
-    var map = new naver.maps.Map('store_map');
-    var myaddress = $('#store_map').data('address'); // 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
-    naver.maps.Service.geocode({
-      address: myaddress
-    }, function(status, response) {
-      if (status !== naver.maps.Service.Status.OK) {
-        return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
-      }
-      var result = response.result;
-      // 검색 결과 갯수: result.total
-      // 첫번째 결과 결과 주소: result.items[0].address
-      // 첫번째 검색 결과 좌표: result.items[0].point.y, result.items[0].point.x
-      var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
-      map.setCenter(myaddr); // 검색된 좌표로 지도 이동
-      // 마커 표시
-      var marker = new naver.maps.Marker({
-        position: myaddr,
-        map: map
-      });
-      $('.store_location').on('click', function(e) {
-        window.location.href = 'http://map.naver.com/index.nhn?query=' + urlencode(myaddress);
-      });
 
-
-    });
-  })();
 
   // 모듈 인스턴스화 필요
   var Popup = (function() {
@@ -312,6 +283,35 @@
 
   })();
 
+  //지도부분
+  var Location = (function() {
+    var x;
+    var y;
+    var map = new naver.maps.Map('store_map');
+    var myaddress = $('#store_map').data('address'); // 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
+    naver.maps.Service.geocode({
+      address: myaddress
+    }, function(status, response) {
+      if (status !== naver.maps.Service.Status.OK) {
+        return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
+      }
+      var result = response.result;
+      // 검색 결과 갯수: result.total
+      // 첫번째 결과 결과 주소: result.items[0].address
+      // 첫번째 검색 결과 좌표: result.items[0].point.y, result.items[0].point.x
+      var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
+      map.setCenter(myaddr); // 검색된 좌표로 지도 이동
+      // 마커 표시
+      var marker = new naver.maps.Marker({
+        position: myaddr,
+        map: map
+      });
+      $('.store_location').on('click', function(e) {
+        window.location.href = 'http://map.naver.com/index.nhn?query=' + urlencode(myaddress);
+      });
 
+
+    });
+  })();
 
 })(window);
