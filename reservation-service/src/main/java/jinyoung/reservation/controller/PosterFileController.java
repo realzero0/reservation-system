@@ -22,8 +22,6 @@ public class PosterFileController {
 	@Autowired
 	FileService fileService;
 	
-	private String baseDir = fileService.getBaseDir();
-	
 	@GetMapping
 	public String posterUpload(HttpServletRequest request) {
 		return "posterUpload";
@@ -31,7 +29,7 @@ public class PosterFileController {
 
 	@PostMapping
 	public String create(@RequestParam("productid") Integer productId, @RequestParam("file") MultipartFile[] files) {
-		baseDir = baseDir.replace("/", File.separator);
+		String baseDir = fileService.getBaseDir();
 		if (files != null && files.length > 0) {
 
 			// windows 사용자라면 "c:\boost\storage\년도\월\일" 형태의 문자열을 구한다.
