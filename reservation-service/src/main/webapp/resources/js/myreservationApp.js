@@ -2,7 +2,8 @@
   'use strict';
 
   var headModule = (function() {
-    $('a.lnk_logo[title=네이버]').click(function() {
+	
+	$('a.lnk_logo[title=네이버]').click(function() {
       window.location.href = 'http://naver.com/';
     });
 

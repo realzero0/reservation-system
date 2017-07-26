@@ -29,7 +29,7 @@
     $('.thumb').on('click', function() {
       var count = $(this).siblings('.img_count').text();
       var commentId = $(this).attr('id');
-      var countElement = $('.img-popup-layer.count span')
+      var countElement = $('.img-popup-layer.count span');
       countElement.text('1 / ' + count);
       $('div.img-popup-layer').show();
 
