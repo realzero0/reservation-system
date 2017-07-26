@@ -6,7 +6,7 @@
   $(document).ready(function() {
     category.initProducts();
   });
-
+    
   //header 영역
   /*
   var headModule = (function() {

@@ -1,7 +1,9 @@
 (function(window) {
   'use strict';
   //header 영역
+  
   var headModule = (function() {
+    /*
     $('a.lnk_logo[title=네이버]').click(function() {
       window.location.href = 'http://naver.com/';
     });
@@ -13,7 +15,7 @@
     $('a.btn_my').click(function() {
       window.location.href = '/booked/list';
     });
-
+*/
     $(".container_visual").find("img").css('width', '414');
     $(".container_visual").find("img").css('height', '414');
   })();
@@ -314,4 +316,7 @@
     });
   })();
 
+	
+  $("img.img_thumb").lazyload();
+	
 })(window);

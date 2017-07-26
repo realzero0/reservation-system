@@ -303,6 +303,5 @@
 <script src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/resources/js/node_modules/jquery-lazyload/jquery.lazyload.js"></script>
 <script src="/resources/js/appDetail.js"></script>
-<script src="/resources/js/lazyLoading.js"></script>
 <script src="/resources/js/slide.js"></script>
 </html>
