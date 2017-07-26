@@ -20,16 +20,17 @@ import jinyoung.reservation.service.*;
 @RequestMapping("/login")
 public class LoginController {
 	
+	//프로퍼티는 static으로는 읽을 수 없다
 	@Value("${naver.login.callback.url}")
-	private static String COLLBACK_URL;
+	private String COLLBACK_URL;
 	
 	private static final String NAVER_OAUTH_CLIENT_ID = "KGCa149JUmPYQhSpiWSn";
 	
 	@Value("${naver.login.client.secret}")
-	private static String NAVER_OAUTH_CLIENT_SECRET;
+	private String NAVER_OAUTH_CLIENT_SECRET;
 	
 	private static final String REQUEST_URL = "https://nid.naver.com/oauth2.0/authorize?client_id="
-			+ NAVER_OAUTH_CLIENT_ID + "&response_type=code&redirect_uri=" + COLLBACK_URL + "&state=";
+			+ NAVER_OAUTH_CLIENT_ID + "&response_type=code&redirect_uri=";
 	private static final String USER_PROFILE_URL = "https://openapi.naver.com/v1/nid/me";
 
 	@Autowired
@@ -46,7 +47,7 @@ public class LoginController {
 		SecureRandom random = new SecureRandom();
 		String state = new BigInteger(130, random).toString(32);
 		request.getSession().setAttribute("state", state);
-		return "redirect:" + REQUEST_URL + state;
+		return "redirect:" + REQUEST_URL + COLLBACK_URL + "&state=" + state;
 	}
 
 	@GetMapping("/oauth2callback")
