@@ -20,7 +20,6 @@ import jinyoung.reservation.service.*;
 @Controller
 @RequestMapping("/review")
 public class ReviewController {
-	private String baseDir = "c:" + File.separator + "boost" + File.separator + "storage" + File.separator;
 
 	@Autowired
 	ReservationUserCommentService commentService;
@@ -30,7 +29,10 @@ public class ReviewController {
 
 	@Autowired
 	ReservationInfoService reservationInfoService;
-
+	
+	@Autowired
+	FileService fileService;
+	
 	@GetMapping
 	public String review(HttpServletRequest request) {
 		return "review";
@@ -67,6 +69,7 @@ public class ReviewController {
 	public String create(@ModelAttribute CommentRegisterFormDto commentForm,
 			@RequestParam("file") MultipartFile[] files) {
 		ArrayList<ImageDto> images = new ArrayList<>();
+		String baseDir = fileService.getBaseDir();
 		if (files != null && files.length > 0) {
 
 			// windows 사용자라면 "c:\boost\storage\년도\월\일" 형태의 문자열을 구한다.
