@@ -41,7 +41,8 @@
 							<div class="container_visual" style="width: 414px;">
 								<ul class="visual_img">
 									<li class="item" style="width: 414px;"><img alt=""
-										class="img_thumb" src="http://220.230.122.151/img/${productDto.fileId}"> <span
+										class="img_thumb"
+										src="http://220.230.122.151/img/${productDto.fileId}"> <span
 										class="img_bg"></span>
 										<div class="visual_txt">
 											<div class="visual_txt_inn">
@@ -54,7 +55,8 @@
 
 									<c:forEach var="image" items="${productImages}" begin="1">
 										<li class="item" style="width: 414px;"><img alt=""
-											class="img_thumb" src="/img/${image.fileId}"> <span
+											class="img_thumb"
+											src="http://220.230.122.151/img/${image.fileId}"> <span
 											class="img_bg"></span></li>
 									</c:forEach>
 
@@ -156,7 +158,7 @@
 													<div class="thumb_area">
 														<a href="#" id="${comment.commentId}" class="thumb"
 															title="이미지 크게 보기"> <img width="90" height="90"
-															class="img_vertical_top" src="/img/${comment.fileIds[0]}"
+															class="img_vertical_top" src="http://220.230.122.151/img/${comment.fileIds[0]}"
 															alt="리뷰이미지">
 														</a> <span class="img_count">${fn:length(comment.fileIds)}</span>
 													</div>
@@ -169,7 +171,8 @@
 													<span class="grade">${comment.score * 5}</span> <span
 														class="name">${comment.username}****</span> <span
 														class="date"><fmt:formatDate
-															value="${comment.createDate}" pattern="yyyy. M. d." /> 방문</span>
+															value="${comment.createDate}" pattern="yyyy. M. d." />
+														방문</span>
 												</div>
 											</div>
 										</div>
@@ -233,7 +236,9 @@
 					<!-- [D] 오시는길 외 다른 탭 선택 시 detail_location에 hide 추가 -->
 					<div class="detail_location hide">
 						<div class="box_store_info no_topline">
-							<a href="http://map.naver.com/index.nhn?query=${productDto.placeStreet}" class="store_location" title="지도웹으로 연결">
+							<a
+								href="http://map.naver.com/index.nhn?query=${productDto.placeStreet}"
+								class="store_location" title="지도웹으로 연결">
 								<div id="store_map" data-address="${productDto.placeStreet}"
 									style="width: 374px; height: 340px;"></div> <span
 								class="img_border"></span> <span class="btn_map"><i
@@ -245,9 +250,10 @@
 									<span class="fn fn-pin2"></span>
 									<p class="store_addr store_addr_bold">${productDto.placeStreet}</p>
 									<c:if test="${!empty productDto.placeLot}">
-									<p class="store_addr">
-										<span class="addr_old">지번</span> <span class="addr_old_detail">${productDto.placeLot}</span>
-									</p>
+										<p class="store_addr">
+											<span class="addr_old">지번</span> <span
+												class="addr_old_detail">${productDto.placeLot}</span>
+										</p>
 									</c:if>
 									<c:if test="${!empty productDto.placeName}">
 										<p class="store_addr addr_detail">${productDto.placeName}</p>

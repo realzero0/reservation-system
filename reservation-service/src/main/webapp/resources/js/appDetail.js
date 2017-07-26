@@ -108,7 +108,7 @@
                 }
 
                 findElement.css({
-                  "left": dX + "px"
+                  "transform": translateX(dX + "px")
                 });
                 if (e.type == 'mousemove') {
                   e.preventDefault();
@@ -140,9 +140,9 @@
       var prev = $('.btn_prev');
       var next = $('.btn_nxt');
       var move = 414;
-      var clickState = false;
       var pages = $('.visual_img .item').length;
       var currentPage = 1;
+      var clickState = false;
       var isDragging = false;
       var isChanged = false;
       var curX;
@@ -182,7 +182,7 @@
             }
 
             findElement.css({
-              "left": dX + "px"
+              "transform": translateX(dX + "px")
             });
             if (e.type == 'mousemove') {
               e.preventDefault();

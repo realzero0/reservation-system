@@ -53,3 +53,6 @@
 	width="130" alt="" class="item_thumb"> <span class="img_border"></span>
 </li>
 </script>
+<script id="popup-img-template" type="text/x-handlebars-template">
+<li> <img	src="{{fileLocation}}"> </li>
+</script>

@@ -3905,10 +3905,11 @@ button {
   top: 0;
   left: 0;
   background-color: black;
-  overflow-y:hidden;
   z-index: 9000;
 }
 .img-popup-layer .head {
+  display: block;
+  position: relative;
   height: 10%;
 }
 .img-popup-layer .exit {
@@ -3917,19 +3918,20 @@ button {
   z-index: 9001;
   width: auto;
   height: auto;
-  top: 30%;
+  top: 35%;
   left: 5%;
-  text-align: center;
   font-size: 2em;
+  position: relative;
 }
 
 .img-popup-layer .count {
   display: block;
-  top: 30%;
+  top: 15%;
   left: 85%;
   width: auto;
   height: 50px;
   z-index: 9001;
+  position: relative;
 }
 
 .img-popup-layer .count span {
@@ -3938,15 +3940,22 @@ button {
 }
 
 .img-popup-layer .img-viewer {
-  display: block;
-  top: 10%;
-  left: 5%;
   width: 90%;
+  left: 5%;
+  display: block;
+  position: relative;
   height: 80%;
-  align-self: center;
+  overflow: hidden;
 }
 
 .img-popup-layer .img-viewer img {
   width: 100%;
   height: auto;
+}
+
+.img-popup-layer .img-viewer ul {
+  width: 100%;
+  white-space: nowrap;
+  display: -webkit-box;
+  position: relative;
 }
