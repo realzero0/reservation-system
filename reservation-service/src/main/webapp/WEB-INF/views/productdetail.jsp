@@ -295,4 +295,6 @@
 	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=KGCa149JUmPYQhSpiWSn&submodules=geocoder"></script>
 <script src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/resources/js/appDetail.js"></script>
+<script src="/resources/js/lazyLoading.js"></script>
+<script src="/resources/js/slide.js"></script>
 </html>
