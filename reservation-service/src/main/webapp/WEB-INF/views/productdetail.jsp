@@ -41,7 +41,7 @@
 							<div class="container_visual" style="width: 414px;">
 								<ul class="visual_img">
 									<li class="item" style="width: 414px;"><img alt=""
-										class="img_thumb" src="/img/${productDto.fileId}"> <span
+										class="img_thumb" src="http://220.230.122.151/img/${productDto.fileId}"> <span
 										class="img_bg"></span>
 										<div class="visual_txt">
 											<div class="visual_txt_inn">
