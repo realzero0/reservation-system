@@ -22,17 +22,20 @@
 <script id="file-upload-template" type="text/x-handlebars-template">
 <option value="{{id}}">{{name}}</option>
 </script>
+
 <script id="comment-template" type="text/x-handlebars-template">
 <li class="list_item">
 	<div>
 		<div class="review_area">
+		{{#if fileIds}}
 			<div class="thumb_area">
 				<a href="#" class="thumb" title="이미지 크게 보기"> <img
 					width="90" height="90" class="img_vertical_top"
-					src="/img/{{fileId}}"
+					src="http://220.230.122.151/img/{{fileIds.[0]}}"
 					alt="리뷰이미지">
 				</a> <span class="img_count">1</span>
 			</div>
+		{{/if}}
 			<h4 class="resoc_name">{{name}}</h4>
 			<p class="review">{{comment}}</p>
 		</div>

@@ -57,6 +57,7 @@
 									등록</span>
 							</div>
 							<ul class="list_short_review">
+							<!-- 
 								<c:forEach var="comment" items="${comments}">
 									<li class="list_item">
 										<div>
@@ -84,6 +85,7 @@
 										</div>
 									</li>
 								</c:forEach>
+								 -->
 
 							</ul>
 						</div>

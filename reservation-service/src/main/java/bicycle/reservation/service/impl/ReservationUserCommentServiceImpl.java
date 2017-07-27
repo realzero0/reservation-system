@@ -53,7 +53,7 @@ public class ReservationUserCommentServiceImpl implements ReservationUserComment
 	@Override
 	@Transactional(readOnly = true)
 	public Collection<CommentReadingDto> getByCommentsProId(Integer productId, Integer page, Integer count) {
-		page *= count;
+		//page *= count;
 		Collection<CommentReadingDto> comments = commentDao.selectCommentsByProId(productId, page, count);
 		if(comments == null) {
 			return null;

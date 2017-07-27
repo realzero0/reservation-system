@@ -11,16 +11,16 @@ import bicycle.reservation.service.*;
 @RestController
 @RequestMapping("/api/comments")
 public class CommentController {
-	private static final Integer REVIEW_MAIN_COUNT = 10;
+	private static final Integer REVIEW_MAIN_COUNT = 3;
 	@Autowired
 	ReservationUserCommentService commentService;
 	
 	@Autowired
 	FileService fileService;
 	
-	@GetMapping("/{productId}")
-	public Collection<CommentReadingDto> getAllAtFront(@PathVariable Integer productId) {
-		return commentService.getByCommentsProId(productId, 0, REVIEW_MAIN_COUNT);
+	@GetMapping("/{productId}/{limitNum}")
+	public Collection<CommentReadingDto> getAllAtFront(@PathVariable Integer productId, @PathVariable Integer limitNum) {
+		return commentService.getByCommentsProId(productId, 3*limitNum, REVIEW_MAIN_COUNT);
 	}
 	
 	@GetMapping("/pictures/{commentId}")
