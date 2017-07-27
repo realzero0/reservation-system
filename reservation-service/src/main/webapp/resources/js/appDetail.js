@@ -218,7 +218,7 @@
     function translate(page) {
       clickState = true;
       $('.figure_pagination .num:first-child').html(page);
-      findElement.css({'transform': 'translateX(-414px)'});
+      
       $findElement.animate({
         'left': -(page - 1) * move + 'px'
       }, 'normal', function() {
