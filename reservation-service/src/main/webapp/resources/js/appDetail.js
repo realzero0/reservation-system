@@ -34,7 +34,7 @@
     var $findElement = $('.img-popup-layer.img-viewer');
     var $ulEle = $findElement.find('ul');
     var $thumb = $('.thumb');
-    console.log($thumb);
+    
     var $countElement;
 
     var itemSource = $('#popup-img-template').html();
@@ -51,20 +51,22 @@
     var move = 602.09;
 
     //$findElement.find('img').attr('src', $(this).find('img').attr('src'));
-
-    $thumb.on('click', function() {
+    function initf($th){
       curImage = 0;
       count = 0;
       $countElement = $('.img-popup-layer.count span');
       images = new Array();
-      commentId = $(this).attr('id');
-      console.log(commentId);
-      count = $(this).siblings('.img_count').text();
+      commentId = $th.attr('id');
+console.log($th.width());
+      count = $th.siblings('.img_count').text();
       $countElement.text('1 / ' + count);
+    }
+
+    $thumb.on('click', function() {
+      initf($(this));
+      console.log();
       $('div.img-popup-layer').show();
       popupImgList();
-      
-      
     });
 
     $('.img-popup-layer.exit').on('click', function() {
@@ -72,7 +74,7 @@
       removeLi();
     });
 
-   function popupImgList(){
+    function popupImgList(){
       $.ajax({
         type: 'GET',
         url: '/api/comments/pictures/' + commentId,
