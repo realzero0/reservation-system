@@ -33,7 +33,7 @@
 					width="90" height="90" class="img_vertical_top"
 					src="http://220.230.122.151/img/{{fileIds.[0]}}"
 					alt="리뷰이미지">
-				</a> <span class="img_count">1</span>
+				</a> <span class="img_count">{{fileIds.length}}</span>
 			</div>
 		{{/if}}
 			<h4 class="resoc_name">{{name}}</h4>
