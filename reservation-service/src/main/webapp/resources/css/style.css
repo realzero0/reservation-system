@@ -3959,3 +3959,10 @@ button {
   display: -webkit-box;
   position: relative;
 }
+.img-popup-layer .img-viewer ul li{
+  width: 90%;
+  height: auto;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+

@@ -27,22 +27,52 @@
 
 
   // 모듈 인스턴스화 필요
-  var PopUpModule = (function() {
-    $('.thumb').on('click', function() {
-      var count = $(this).siblings('.img_count').text();
-      var commentId = $(this).attr('id');
-      var countElement = $('.img-popup-layer.count span');
-      countElement.text('1 / ' + count);
-      $('div.img-popup-layer').show();
+  
+  
 
-      var findElement = $('.img-popup-layer.img-viewer');
-      var isDragging = false;
-      var isChanged = false;
-      var curX;
-      var originOffset;
-      var images = new Array();
-      var curImage = 0;
-      findElement.find('img').attr('src', $(this).find('img').attr('src'));
+  var PopUpModule = (function() {
+    var $findElement = $('.img-popup-layer.img-viewer');
+    var $ulEle = $findElement.find('ul');
+    var $thumb = $('.thumb');
+    console.log($thumb);
+    var $countElement;
+
+    var itemSource = $('#popup-img-template').html();
+    var itemTemplate = Handlebars.compile(itemSource);
+
+    var isDragging = false;
+    var curX;
+    var originOffset;
+    var images;
+    var curImage;
+    var count;
+    var commentId;
+    var dX;
+    var move = 602.09;
+
+    //$findElement.find('img').attr('src', $(this).find('img').attr('src'));
+
+    $thumb.on('click', function() {
+      curImage = 0;
+      count = 0;
+      $countElement = $('.img-popup-layer.count span');
+      images = new Array();
+      commentId = $(this).attr('id');
+      console.log(commentId);
+      count = $(this).siblings('.img_count').text();
+      $countElement.text('1 / ' + count);
+      $('div.img-popup-layer').show();
+      popupImgList();
+      
+      
+    });
+
+    $('.img-popup-layer.exit').on('click', function() {
+      $('div.img-popup-layer').hide();
+      removeLi();
+    });
+
+   function popupImgList(){
       $.ajax({
         type: 'GET',
         url: '/api/comments/pictures/' + commentId,
@@ -51,6 +81,228 @@
           for (var i = 0; i < res.length; i++) {
             images[i] = res[i];
           }
+          console.log(images);
+          makeList(res);
+          bindtouchEvent();
+        }
+      });
+      $ulEle.css({
+        "left": 0+"px"
+      });
+    }
+
+    function removeLi(){
+      $ulEle.children().remove();
+    }
+
+    function makeList(res){
+      var liEle = [];
+      for (var i = 0; i < res.length; i++) {
+        images[i] = res[i];
+        liEle[i] = itemTemplate({'fileLocation':'http://220.230.122.151/img/' + images[i]});
+      }
+      liEle = liEle.join('');
+      $findElement.find('ul').append(liEle);
+    }
+    
+     
+    function bindtouchEvent(){
+
+      $ulEle.on('mousedown touchstart', function(e) {
+        isDragging = true;
+          
+        if (e.type == 'touchstart') {
+          e = e.originalEvent.touches[0];
+        }
+        originOffset = this.offsetLeft;
+        curX = e.clientX - originOffset;
+       
+      });
+
+      $ulEle.on('mousemove touchmove', function(e) {
+        if (isDragging) {
+          if (e.type == 'touchmove') {
+            e = e.originalEvent.touches[0];
+          }
+          dX = e.clientX - curX;
+          $ulEle.css({
+            "left": dX+"px"
+          });
+        }
+      });
+
+      $ulEle.on('dragstart',function(){
+        return false;
+      });
+
+      $(document).on('mouseup touchend', function(e) {
+        isDragging = false;
+        dX = e.clientX-originOffset - curX;
+       
+        if (dX < -200 || 200 < dX ) {
+          if(!imageMove(e))
+            return false;
+        } else{
+       
+          $ulEle.css({
+             "left": originOffset+"px"
+          });
+        }
+           
+      });
+    }
+
+    function imageMove(e){
+      var inDecre = -dX/Math.abs(dX);
+      curImage += inDecre;
+      if (curImage < count && curImage >= 0) {
+        $countElement.text((curImage+1) + ' / ' + count);
+        isDragging = false;
+        $ulEle.animate({
+          "left": -inDecre*(move)*curImage+"px"
+        }, 'normal'
+        );
+      } else{
+        curImage -= inDecre;
+          $ulEle.css({
+          "left": originOffset+"px"
+        });
+        return false;
+      }
+      if (e.type == 'mousemove') {
+        e.preventDefault();
+      }
+    }
+  })();
+   
+
+  //이미지 슬라이드 부분
+  var ImageRollerModule = (function() {
+    
+    var $findElement = $('.container_visual').find('ul');
+    var $imageContainer = $('.container_visual');
+    var $prev = $('.btn_prev');
+    var $next = $('.btn_nxt');
+    var move = 414;
+    var pages = $('.visual_img .item').length;
+    var currentPage = 1;
+    var clickState = false;
+    var isDragging = false;
+    var isChanged = false;
+    var curX;
+    var images = new Array();
+
+    $('.figure_pagination .num.off span').html(pages);
+     
+    $findElement.on('mousedown touchstart', function(e) {
+          isDragging = true;
+          if (e.type == 'touchstart') {
+            e = e.originalEvent.touches[0];
+          }
+          curX = e.clientX - this.offsetLeft;
+    });
+    $findElement.on('mousemove touchmove', function(e) {
+      if (isDragging && !isChanged) {
+        var dX = e.clientX - curX;
+        imageMove(dX);
+      }
+    });
+   
+    $findElement.on('mouseup touchend', function(e) {
+      isDragging = false;
+      isChanged = false;
+      translate(currentPage);
+    });
+    $prev.on({
+      'click': function() {
+        if (clickState === false) {
+          if (currentPage > 1) {
+            currentPage--;
+            translate(currentPage);
+          }
+        }
+      }
+    });
+
+    $next.on({
+      'click': function() {
+        if (clickState === false) {
+          if (currentPage < pages) {
+            currentPage++;
+            translate(currentPage);
+          }
+        }
+      }
+    });
+
+    function imageMove(dX){
+      if (dX > -(currentPage - 1) * move + 30) { // >
+        isDragging = false;
+        isChanged = true;
+        if (currentPage > 1) {
+          currentPage--;
+          translate(currentPage);
+          return;
+        }
+      } else if (dX < -(currentPage - 1) * move - 30) { // <
+      
+        isDragging = false;
+        isChanged = true;
+
+        if (currentPage < pages) {
+          currentPage++;
+          translate(currentPage);
+          return;
+        }
+      }
+    }
+
+    function translate(page) {
+      clickState = true;
+      $('.figure_pagination .num:first-child').html(page);
+      
+      $findElement.animate({
+        'left': -(page - 1) * move + 'px'
+      }, 'normal', function() {
+        clickState = false;
+      });
+    }
+  })();
+//popup-img-template
+  // 모듈 인스턴스화 필요
+  /*
+  var PopUpModule = (function() {
+    $('.thumb').on('click', function() {
+      var count = $(this).siblings('.img_count').text();
+      var commentId = $(this).attr('id');
+      var countElement = $('.img-popup-layer.count span');
+      countElement.text('1 / ' + count);
+      $('div.img-popup-layer').show();
+      var itemSource = $('#popup-img-template').html();
+      console.log(itemSource);
+      var itemTemplate = Handlebars.compile(itemSource);
+
+      var findElement = $('.img-popup-layer.img-viewer');
+      var isDragging = false;
+      var isChanged = false;
+      var curX;
+      var originOffset;
+      var images = new Array();
+      var curImage = 0;
+      //findElement.find('img').attr('src', $(this).find('img').attr('src'));
+      $.ajax({
+        type: 'GET',
+        url: '/api/comments/pictures/' + commentId,
+        contentType: 'application/json',
+        success: function(res) {
+          console.log(res);
+          var liEle = [];
+          for (var i = 0; i < res.length; i++) {
+            images[i] = res[i];
+            liEle[i] = itemTemplate({'fileLocation':'http://220.230.122.151/img/' + images[i]});
+          }
+          liEle = liEle.join('');
+          findElement.find('ul').append(liEle);
           if (count > 1) {
             findElement.on('mousedown touchstart', function(e) {
               isDragging = true;
@@ -134,99 +386,6 @@
     });
   })();
 
-
-  //이미지 슬라이드 부분
-  var ImageRollerModule = (function() {
-    
-    var $findElement = $('.container_visual').find('ul');
-    var $imageContainer = $('.container_visual');
-    var $prev = $('.btn_prev');
-    var $next = $('.btn_nxt');
-    var move = 414;
-    var pages = $('.visual_img .item').length;
-    var currentPage = 1;
-    var clickState = false;
-    var isDragging = false;
-    var isChanged = false;
-    var curX;
-    var images = new Array();
-
-    $('.figure_pagination .num.off span').html(pages);
-    $findElement.on('mousedown touchstart', function(e) {
-          isDragging = true;
-          if (e.type == 'touchstart') {
-            e = e.originalEvent.touches[0];
-          }
-          curX = e.clientX - this.offsetLeft;
-    });
-    $findElement.on('mousemove touchmove', function(e) {
-      if (isDragging && !isChanged) {
-        var dX = e.clientX - curX;
-        imageMove(dX);
-      }
-    });
-
-    $findElement.on('mouseup touchend', function(e) {
-      isDragging = false;
-      isChanged = false;
-      translate(currentPage);
-    });
-    $prev.on({
-      'click': function() {
-        if (clickState === false) {
-          if (currentPage > 1) {
-            currentPage--;
-            translate(currentPage);
-          }
-        }
-      }
-    });
-
-    $next.on({
-      'click': function() {
-        if (clickState === false) {
-          if (currentPage < pages) {
-            currentPage++;
-            translate(currentPage);
-          }
-        }
-      }
-    });
-
-    function imageMove(dX){
-      if (dX > -(currentPage - 1) * move + 30) { // >
-              
-        isDragging = false;
-        isChanged = true;
-        if (currentPage > 1) {
-          currentPage--;
-          translate(currentPage);
-          return;
-        }
-      } else if (dX < -(currentPage - 1) * move - 30) { // <
-      
-        isDragging = false;
-        isChanged = true;
-
-        if (currentPage < pages) {
-          currentPage++;
-          translate(currentPage);
-          return;
-        }
-      }
-    }
-    function translate(page) {
-      clickState = true;
-      $('.figure_pagination .num:first-child').html(page);
-      
-      $findElement.animate({
-        'left': -(page - 1) * move + 'px'
-      }, 'normal', function() {
-        clickState = false;
-      });
-    }
-  })();
-/*
   var ImageRollerModule = (function() {
     var imgRolling = function(autoRollingClass) {
       var findElement = $('.' + autoRollingClass).find('ul');

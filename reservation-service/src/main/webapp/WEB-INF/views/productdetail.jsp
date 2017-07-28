@@ -300,8 +300,11 @@
 </body>
 <script type="text/javascript"
 	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=KGCa149JUmPYQhSpiWSn&submodules=geocoder"></script>
+<jsp:include page="include/handlebars-templates.jsp" flush="false" />
 <script src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/resources/js/node_modules/jquery-lazyload/jquery.lazyload.js"></script>
+<script	src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script src="/resources/js/appDetail.js"></script>
-<script src="/resources/js/slide.js"></script>
+
+<!-- <script src="/resources/js/slide.js"></script> -->
 </html>
