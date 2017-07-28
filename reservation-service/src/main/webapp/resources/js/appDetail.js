@@ -48,8 +48,8 @@
     var count;
     var commentId;
     var dX;
-    var move = 602.09;
-
+    var move;
+    var autoMoveSize;
     //$findElement.find('img').attr('src', $(this).find('img').attr('src'));
     function initf($th){
       curImage = 0;
@@ -57,7 +57,6 @@
       $countElement = $('.img-popup-layer.count span');
       images = new Array();
       commentId = $th.attr('id');
-      console.log($('.img'));
       count = $th.siblings('.img_count').text();
       $countElement.text('1 / ' + count);
     }
@@ -67,6 +66,12 @@
       console.log();
       $('div.img-popup-layer').show();
       popupImgList();
+    });
+
+    $(window).resize(function(){
+      console.log("window size change");
+      move = $ulEle.width();
+      autoMoveSize = $ulEle.width()/3;
     });
 
     $('.img-popup-layer.exit').on('click', function() {
@@ -106,7 +111,7 @@
       liEle = liEle.join('');
       $findElement.find('ul').append(liEle);
       move = $ulEle.width();
-      console.log(move);
+      autoMoveSize = $ulEle.width()/3;
     }
     
      
