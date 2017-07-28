@@ -29,7 +29,7 @@
 		<div class="review_area">
 		{{#if fileIds}}
 			<div class="thumb_area">
-				<a href="#" class="thumb" title="이미지 크게 보기"> <img
+				<a href="#" class="thumb" id={{commentId}} title="이미지 크게 보기"> <img
 					width="90" height="90" class="img_vertical_top"
 					src="http://220.230.122.151/img/{{fileIds.[0]}}"
 					alt="리뷰이미지">

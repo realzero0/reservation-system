@@ -1,7 +1,6 @@
 (function(window) {
   'use strict';
 
-
   //이미지 슬라이드 부분
   //드래그 방지
   $(document).on("dragstart", function(e) {
@@ -20,6 +19,8 @@
     var commentId = $(this).attr('id');
     var countElement = $('.img-popup-layer.count span')
     countElement.text('1 / ' + count);
+
+
 
     var isDragging = false;
     var isChanged = false;
@@ -108,56 +109,50 @@
     }
   });
 
+
+
   /* 성찬 작업 */
-
-  //option
-  /*
-  append할 위치 변수
-
-  */
-
-  /*           module test*/
 /*
-  var ajaxSet = function ajax(params) {
-    this.options = Object.assign({}, { // 빈객체가 타겟. {}
-      method: "GET",
-      url: null,
-      contentType: "application/json",
-      success: function(res) {}
-    }, params); //params 인자로넘어가서 전달되고 맨아래 있는거처럼 사용하면됨.(덮어씌워지는거)
-  }
-
-new ajaxSet({
-
-})
-  var AjaxGetDataModule = (function() {
-    var html = "";
-    var ajaxObj = function(ajaxForm) {
-      return ajaxForm;
-    };
-
-    var getOffers = function() {
-      var success = ajaxObj(ajaxForm).options.success || {};
-      ajaxObj(ajaxForm).options.success = function(res) {
-        for (i = 0; i < res.length; i++) {
-          html = html + itemTemplate(res[i]);
+  var AjaxTemplateModule = (function() {
+    var getData = function(params) {
+      var file = [];
+      ajaxObj = Object.assign({}, { // 빈객체가 타겟. {}
+        method: "GET",
+        url: null,
+        contentType: "application/json",
+        success: function(res){
+          $.each(res, function(key, value){
+            file.push(value);
+          });
+          //console.log(file.length);
+          /*
+          for (var i = 0; i < res.length; i++) {
+            file[i] = {"fileLocation" : ('http://220.230.122.151/img/' + res[i])};
+          }*/
+          /*
         }
-        $('.list_short_review').append(html);
-      };
-      $.ajax(ajaxObj.options);
-      //return getData();
+      }, params)
+      $.ajax(ajaxObj);
+      return file;
+    }
+
+    var insertTemplate = function(templateSource, arr, $where){
+      var html="";
+      var Source = templateSource; //$("#popup-img-template").html();
+      var Template = Handlebars.compile(Source);
+
+      for(var i=0; i<arr.length; i++){
+        html = html + popupTemplate(arr[i]);
+      }
+      $where.append(html);
+      return html;
     }
     return {
-      ajaxObj: ajaxObj,
-      getOffers: getOffers
+      getData: getData,
+      insertTemplate: insertTemplate
     }
   })();
-
-  AjaxGetDataModule(new ajaxSet({
-    url: 'api/comments/1/0',
-    method: 'GET'
-  })).getOffers();
-  */
+*/
 
     var ajaxGetData = (function() {
       var limitCount = 0;
@@ -172,7 +167,6 @@ new ajaxSet({
           url: '/api/comments/' + productId + '/' + limitCount,
           contentType: 'application/json',
           success: function(res) {
-            console.log(res);
             console.log(limitCount + "번째 요청 전달");
             for (var i = 0; i < res.length; i++) {
               html = html + itemTemplate(res[i])
@@ -181,29 +175,37 @@ new ajaxSet({
             getDataSize = res.length;
           }
         });
-
+      };
+      var setCount = function(n){
+        limitCount = n;
+      };
+      var getCount = function(){
+        return limitCount;
       };
       var getOffers = function(){
-        limitCount++;
         if(getDataSize != 0){
             return getData();
         }
         else{
           console.log("데이터 수신멈춰");
         }
-      }
-      return{
-        getOffers: getOffers
-      }
+      };
 
+
+      return{
+        getOffers: getOffers,
+        setCount: setCount,
+        getCount: getCount
+      }
     })();
+
     ajaxGetData.getOffers();
 
     $(document).scroll(function() {
       var maxHeight = $(document).height();
       var currentScroll = $(window).scrollTop() + $(window).height();
-
       if (maxHeight <= currentScroll + 10) {
+        ajaxGetData.setCount(ajaxGetData.getCount()+1);
         ajaxGetData.getOffers();
       }
     });
