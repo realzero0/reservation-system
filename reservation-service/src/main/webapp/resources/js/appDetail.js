@@ -57,7 +57,7 @@
       $countElement = $('.img-popup-layer.count span');
       images = new Array();
       commentId = $th.attr('id');
-console.log($th.width());
+      console.log($('.img'));
       count = $th.siblings('.img_count').text();
       $countElement.text('1 / ' + count);
     }
@@ -105,6 +105,8 @@ console.log($th.width());
       }
       liEle = liEle.join('');
       $findElement.find('ul').append(liEle);
+      move = $ulEle.width();
+      console.log(move);
     }
     
      
