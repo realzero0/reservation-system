@@ -55,7 +55,9 @@
     $(window).resize(function(){
       move = $ulEle.width();
       autoMoveSize = $ulEle.width()/3;
-      
+      $ulEle.css({
+        left: -move*curImage+"px"
+      });
     });
 
     $('.img-popup-layer.exit').on('click', function() {
@@ -108,7 +110,7 @@
         }
         originOffset = this.offsetLeft;
         curX = e.clientX - originOffset;
-       
+        //console.log(e.clientX +"-"+ originOffset + "=" + curX);
       });
 
       $ulEle.on('mousemove touchmove', function(e) {
@@ -129,13 +131,16 @@
 
       $(document).on('mouseup touchend', function(e) {
         isDragging = false;
-        dX = e.clientX-originOffset - curX;
+       
+        //console.log(dX +"="+e.clientX+"-"+originOffset+"-"+curX);
+        dX = e.clientX - originOffset - curX;
        
         if (dX < -200 || 200 < dX ) {
+          console.log("ddd");
           if(!imageMove(e))
             return false;
         } else{
-          
+          console.log("ffff");
           $ulEle.css({
              "left": originOffset+"px"
           });
