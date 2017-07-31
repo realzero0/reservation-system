@@ -25,7 +25,7 @@ public class LoginController {
 	private String CALLBACK_URL;
 	
 	@Value("${naver.login.client.id}")
-	private String NAVER_OAUTH_CLIENT_ID = "KGCa149JUmPYQhSpiWSn";
+	private String NAVER_OAUTH_CLIENT_ID;
 	
 	@Value("${naver.login.client.secret}")
 	private String NAVER_OAUTH_CLIENT_SECRET;
