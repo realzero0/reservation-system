@@ -38,10 +38,12 @@
         imageMove(dX);
       }
     });
-    $findElement.on('mouseup touchend', function(e) {
-      isDragging = false;
-      isChanged = false;
-      translate(currentPage);
+    $(document).on('mouseup touchend', function(e) {
+      if (isDragging) {
+        isDragging = false;
+        isChanged = false;
+        translate(currentPage);
+      }
     });
     $prev.on({
       'click': function() {
@@ -63,6 +65,7 @@
         }
       }
     });
+
     function imageMove(dX) {
       if (dX > -(currentPage - 1) * move + 30) { // >
         isDragging = false;
@@ -82,6 +85,7 @@
         }
       }
     }
+
     function translate(page) {
       clickState = true;
       $('.figure_pagination .num:first-child').html(page);
