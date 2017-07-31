@@ -3919,7 +3919,7 @@ button {
   width: auto;
   height: auto;
   top: 35%;
-  left: 5%;
+  left: 10%;
   font-size: 2em;
   position: relative;
 }
@@ -3927,7 +3927,7 @@ button {
 .img-popup-layer .count {
   display: inline-block;
   top: 35%;
-  left: 80%;
+  left: 70%;
   width: auto;
   height: 50px;
   z-index: 9001;
