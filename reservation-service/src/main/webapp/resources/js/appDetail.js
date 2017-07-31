@@ -3,19 +3,7 @@
   //header 영역
   
   var headModule = (function() {
-    /*
-    $('a.lnk_logo[title=네이버]').click(function() {
-      window.location.href = 'http://naver.com/';
-    });
-
-    $('a.lnk_logo[title=예약]').click(function() {
-      window.location.href = '/';
-    });
-
-    $('a.btn_my').click(function() {
-      window.location.href = '/booked/list';
-    });
-*/
+    
     $(".container_visual").find("img").css('width', '414');
     $(".container_visual").find("img").css('height', '414');
   })();
@@ -28,7 +16,158 @@
 
   // 모듈 인스턴스화 필요
   
-  
+ /*
+  var PopUpModule = {
+    $findElement: $('.img-popup-layer.img-viewer'),
+    $ulEle: $findElement.find('ul'),
+    $thumb: $('.thumb'),
+
+    $countElement: $('.img-popup-layer.count span'),
+    itemSource: $('#popup-img-template').html(),
+    itemTemplate: Handlebars.compile(itemSource),
+
+    isDragging: false,
+    
+    curX: ,
+    originOffset:,
+    images: ,
+    curImage: ,
+    count: ,
+    commentId: ,
+    dX: ,
+    move: ,
+    autoMoveSize: ,
+    
+    //$findElement.find('img').attr('src', $(this).find('img').attr('src'));
+    init: function (){
+      this.curImage = 0;
+      this.count = 0;
+      
+      this.images = new Array();
+      this.commentId = $(this).attr('id');
+      this.count = $(this).siblings('.img_count').text();
+      this.$countElement.text('1 / ' + count);
+
+      this.$thumb.on('click', function() {
+        $('div.img-popup-layer').show();
+        popupImgList();
+      });
+    },
+
+    popupImgList: function(){
+      $.ajax({
+        type: 'GET',
+        url: '/api/comments/pictures/' + commentId,
+        contentType: 'application/json',
+        success: function(res) {
+          for (var i = 0; i < res.length; i++) {
+            this.images[i] = res[i];
+          }
+          makeList(res);
+          bindEvent();
+        }
+      });
+      this.$ulEle.css({
+        "left": 0+"px"
+      });
+    },
+
+    removeLi: function(){
+      this.$ulEle.children().remove();
+    },
+
+    makeList : function (res){
+      var liEle = [];
+      for (var i = 0; i < res.length; i++) {
+        this.images[i] = res[i];
+        liEle[i] = itemTemplate({'fileLocation':'http://220.230.122.151/img/' + images[i]});
+      }
+      liEle = liEle.join('');
+      this.$findElement.find('ul').append(liEle);
+      this.move = $ulEle.width();
+      this.autoMoveSize = $ulEle.width()/3;
+    },
+    
+     
+    bindEvent: function(){
+      $(window).resize(function(){
+        this.move = this.$ulEle.width();
+        this.autoMoveSize = this.$ulEle.width()/3;
+      });
+
+      $('.img-popup-layer.exit').on('click', function() {
+        $('div.img-popup-layer').hide();
+        removeLi();
+      });
+
+      this.$ulEle.on('mousedown touchstart', function(e) {
+        this.isDragging = true;
+          
+        if (e.type == 'touchstart') {
+          e = e.originalEvent.touches[0];
+        }
+        this.originOffset = this.offsetLeft;
+        this.curX = e.clientX - this.originOffset;
+       
+      });
+
+      $ulEle.on('mousemove touchmove', function(e) {
+        if (this.isDragging) {
+          if (e.type == 'touchmove') {
+            e = e.originalEvent.touches[0];
+          }
+          this.dX = e.clientX - this.curX;
+          this.$ulEle.css({
+            "left": dX+"px"
+          });
+        }
+      });
+
+      $ulEle.on('dragstart',function(){
+        return false;
+      });
+
+      $(document).on('mouseup touchend', function(e) {
+        this.isDragging = false;
+        this.dX = e.clientX - this.originOffset - this.curX;
+       
+        if (dX < -200 || 200 < dX ) {
+          if(!imageMove(e))
+            return false;
+        } else{
+       
+          this.$ulEle.css({
+             "left": this.originOffset+"px"
+          });
+        }
+           
+      });
+    },
+
+    imageMove: function(e){
+      var inDecre = -dX/Math.abs(dX);
+      this.curImage += inDecre;
+      if (this.curImage < this.count && this.curImage >= 0) {
+        this.$countElement.text((this.curImage+1) + ' / ' + this.count);
+        this.isDragging = false;
+        this.$ulEle.animate({
+          "left": -inDecre*(this.move)*this.curImage+"px"
+        }, 'normal'
+        );
+      } else{
+        this.curImage -= inDecre;
+          this.$ulEle.css({
+          "left": this.originOffset+"px"
+        });
+        return false;
+      }
+      if (e.type == 'mousemove') {
+        e.preventDefault();
+      }
+    }
+  };
+*/
+  //PopUpModule.init().bind(this);
 
   var PopUpModule = (function() {
     var $findElement = $('.img-popup-layer.img-viewer');
@@ -51,7 +190,7 @@
     var move;
     var autoMoveSize;
     //$findElement.find('img').attr('src', $(this).find('img').attr('src'));
-    function initf($th){
+    function init($th){
       curImage = 0;
       count = 0;
       $countElement = $('.img-popup-layer.count span');
@@ -62,7 +201,7 @@
     }
 
     $thumb.on('click', function() {
-      initf($(this));
+      init($(this));
       console.log();
       $('div.img-popup-layer').show();
       popupImgList();
@@ -277,228 +416,6 @@
       });
     }
   })();
-//popup-img-template
-  // 모듈 인스턴스화 필요
-  /*
-  var PopUpModule = (function() {
-    $('.thumb').on('click', function() {
-      var count = $(this).siblings('.img_count').text();
-      var commentId = $(this).attr('id');
-      var countElement = $('.img-popup-layer.count span');
-      countElement.text('1 / ' + count);
-      $('div.img-popup-layer').show();
-      var itemSource = $('#popup-img-template').html();
-      console.log(itemSource);
-      var itemTemplate = Handlebars.compile(itemSource);
-
-      var findElement = $('.img-popup-layer.img-viewer');
-      var isDragging = false;
-      var isChanged = false;
-      var curX;
-      var originOffset;
-      var images = new Array();
-      var curImage = 0;
-      //findElement.find('img').attr('src', $(this).find('img').attr('src'));
-      $.ajax({
-        type: 'GET',
-        url: '/api/comments/pictures/' + commentId,
-        contentType: 'application/json',
-        success: function(res) {
-          console.log(res);
-          var liEle = [];
-          for (var i = 0; i < res.length; i++) {
-            images[i] = res[i];
-            liEle[i] = itemTemplate({'fileLocation':'http://220.230.122.151/img/' + images[i]});
-          }
-          liEle = liEle.join('');
-          findElement.find('ul').append(liEle);
-          if (count > 1) {
-            findElement.on('mousedown touchstart', function(e) {
-              isDragging = true;
-              if (e.type == 'touchstart') {
-                e = e.originalEvent.touches[0];
-              }
-              curX = e.clientX - this.offsetLeft;
-              originOffset = this.offsetLeft;
-            });
-            findElement.on('mousemove touchmove', function(e) {
-              if (isDragging && !isChanged) {
-
-                if (e.type == 'touchmove') {
-                  e = e.originalEvent.touches[0];
-                }
-                var dX = e.clientX - curX;
-                if (dX > 0) {
-                  if (curImage === count - 1) {
-                    return;
-                  }
-                }
-                if (dX < 24) {
-                  if (curImage === 0) {
-                    return;
-                  }
-                }
-
-                if (dX > 60) {
-                  curImage++;
-                  if (curImage < count) {
-                    $(this).find('img').attr('src', 'http://220.230.122.151/img/' + images[curImage]);
-                    countElement.text((curImage + 1) + ' / ' + count);
-                    isDragging = false;
-                    isChanged = true;
-                    findElement.css({
-                      "left": originOffset + "px"
-                    });
-                    return;
-                  } else {
-                    curImage = count - 1;
-                  }
-                } else if (dX < -36) {
-                  curImage--;
-                  if (curImage >= 0) {
-                    $(this).find('img').attr('src', 'http://220.230.122.151/img/' + images[curImage]);
-                    countElement.text((curImage + 1) + ' / ' + count);
-                    isDragging = false;
-                    isChanged = true;
-                    findElement.css({
-                      "left": originOffset + "px"
-                    });
-                    return;
-                  } else {
-                    curImage = 0;
-                  }
-
-                }
-
-                findElement.css({
-                  "transform": translateX(dX + "px")
-                });
-                if (e.type == 'mousemove') {
-                  e.preventDefault();
-                }
-              }
-            });
-            $(document).on('mouseup touchend', function(e) {
-              isDragging = false;
-              isChanged = false;
-              findElement.css({
-                "left": originOffset + "px"
-              });
-            });
-          }
-        }
-      });
-      $('.img-popup-layer.exit').on('click', function() {
-        $('div.img-popup-layer').hide();
-      })
-
-    });
-  })();
-
-  var ImageRollerModule = (function() {
-    var imgRolling = function(autoRollingClass) {
-      var findElement = $('.' + autoRollingClass).find('ul');
-      var prev = $('.btn_prev');
-      var next = $('.btn_nxt');
-      var move = 414;
-      var pages = $('.visual_img .item').length;
-      var currentPage = 1;
-      var clickState = false;
-      var isDragging = false;
-      var isChanged = false;
-      var curX;
-      var images = new Array();
-      if (pages > 1) {
-        findElement.on('mousedown touchstart', function(e) {
-          isDragging = true;
-          if (e.type == 'touchstart') {
-            e = e.originalEvent.touches[0];
-          }
-          curX = e.clientX - this.offsetLeft;
-        });
-        findElement.on('mousemove touchmove', function(e) {
-          if (isDragging && !isChanged) {
-
-            if (e.type == 'touchmove') {
-              e = e.originalEvent.touches[0];
-            }
-            var dX = e.clientX - curX;
-            
-            if (dX > -(currentPage - 1) * move + 30) { // >
-              
-              isDragging = false;
-              isChanged = true;
-              if (currentPage > 1) {
-                currentPage--;
-                translate(currentPage);
-                return;
-              }
-            } else if (dX < -(currentPage - 1) * move - 30) { // <
-            
-              isDragging = false;
-              isChanged = true;
-
-              if (currentPage < pages) {
-                currentPage++;
-                translate(currentPage);
-                return;
-              }
-            }
-
-            findElement.css({
-              "transform": translateX(dX + "px")
-            });
-            if (e.type == 'mousemove') {
-              e.preventDefault();
-            }
-          }
-        });
-        findElement.on('mouseup touchend', function(e) {
-          isDragging = false;
-          isChanged = false;
-          translate(currentPage);
-        });
-      }
-      $('.figure_pagination .num.off span').html(pages);
-      prev.on({
-        'click': function() {
-          if (clickState === false) {
-            if (currentPage > 1) {
-              currentPage--;
-              translate(currentPage);
-            }
-          }
-        }
-      });
-
-      next.on({
-        'click': function() {
-          if (clickState === false) {
-            if (currentPage < pages) {
-              currentPage++;
-              translate(currentPage);
-            }
-          }
-        }
-      });
-
-      function translate(page) {
-        clickState = true;
-        $('.figure_pagination .num:first-child').html(page);
-        findElement.animate({
-          'left': -(page - 1) * move + 'px'
-        }, 'normal', function() {
-          clickState = false;
-        });
-      }
-    };
-    return {
-      imgRolling: imgRolling
-    };
-  })();
-*/
-  //ImageRollerModule.imgRolling('container_visual');
-
 
 
   var buttonModule = (function() {

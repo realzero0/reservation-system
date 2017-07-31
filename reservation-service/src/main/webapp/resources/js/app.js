@@ -7,21 +7,6 @@
     CategoryModule.initProducts();
   });
 
-  //header 영역
-  /*
-  var headModule = (function() {
-    $('a.lnk_logo[title=네이버]').click(function() {
-      window.location.href = 'http://naver.com/';
-    });
-    $('a.lnk_logo[title=예약]').click(function() {
-      window.location.href = '/';
-    });
-    $('a.btn_my').click(function() {
-      window.location.href = '/booked/list';
-    });
-  })();
-*/
-
 
   //promotion slide 영역
   var imageRoller = (function() {

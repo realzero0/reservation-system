@@ -3,20 +3,7 @@
 
  
     var headModule = (function() {
-	 /*
-	$('a.lnk_logo[title=네이버]').click(function() {
-    
-      window.location.href = 'http://naver.com/';
-    });
 
-    $('a.lnk_logo[title=예약]').click(function() {
-      window.location.href = '/';
-    });
-
-    $('a.btn_my').click(function() {
-      window.location.href = '/booked/list';
-    });
-    */
     var $allButton = $('.ico_book2').closest('.item');
     var $toUseButton = $('.ico_book_ss').closest('.item');
     var $usedButton = $('.ico_check').closest('.item');
@@ -101,11 +88,5 @@
       e.preventDefault();
       $popup.hide();
     }
-
-
-
   })();
-
-
-
 })(window);
