@@ -118,7 +118,7 @@
 <script	src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/resources/js/node_modules/egjs/dist/pkgd/eg.pkgd.min.js"></script>
-<script src="/resources/js/CommnonJS.js"></script>
+<script src="/resources/js/CommonJS.js"></script>
 <script src="/resources/js/reviewApp.js"></script>
 
 
