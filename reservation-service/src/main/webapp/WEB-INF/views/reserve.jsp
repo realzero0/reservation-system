@@ -235,5 +235,6 @@
 	</footer>
 </body>
 <script src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/resources/js/node_modules/egjs/dist/pkgd/eg.pkgd.min.js"></script>
 <script src="/resources/js/reserve.js"></script>
 </html>

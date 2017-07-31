@@ -155,44 +155,7 @@
   }
 
 
-
-
-
-  var ConvertTimestampModule = (function() {
-    var convert = function(timestamp) {
-      var d = new Date(timestamp); // Convert the passed timestamp to milliseconds
-      //console.log(d);
-      var yyyy = d.getFullYear();
-      var mm = ('0' + (d.getMonth() + 1)).slice(-2); // Months are zero based. Add leading 0.
-      var dd = ('0' + d.getDate()).slice(-2); // Add leading 0.
-      var hh = d.getHours();
-      var h = hh;
-      var min = ('0' + d.getMinutes()).slice(-2); // Add leading 0.
-      var ampm = 'AM';
-      var time;
-
-      if (hh > 12) {
-        h = hh - 12;
-        ampm = 'PM';
-      } else if (hh === 12) {
-        h = 12;
-        ampm = 'PM';
-      } else if (hh == 0) {
-        h = 12;
-      }
-      // ie: 2013-02-18, 8:35 AM
-      //console.log(yyyy);
-      time = yyyy + '-' + mm + '-' + dd + ', ' + h + ':' + min + ' ' + ampm;
-      return time;
-    }
-    return {
-      convert: convert
-    }
-  })();
-
-
-
-
+var converter = new ConvertTimestamp();
 
   var AjaxGetData = (function() {
     var limitCount = 0;
@@ -211,7 +174,7 @@
           for (var i = 0; i < res.length; i++) {
             res[i].score = res[i].score * 5 + ".0";
             res[i].username = res[i].username + "***";
-            res[i].createDate = (ConvertTimestampModule.convert(res[i].createDate));
+            res[i].createDate = converter.convert(res[i].createDate);
             html = html + itemTemplate(res[i])
           }
           $('.list_short_review').append(html);

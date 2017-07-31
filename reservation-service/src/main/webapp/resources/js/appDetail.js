@@ -26,21 +26,28 @@
     var itemTemplate = Handlebars.compile(itemSource);
 
     var isDragging = false;
+    var isDowning = false;
+    var curImage = 0; 
+
     var curX;
-    var originOffset;
+    var originOffset = 0;
     var images;
-    var curImage;
     var count;
     var commentId;
     var dX;
     var move;
     var autoMoveSize;
+<<<<<<< Updated upstream
 
     function init($th) {
       curImage = 0;
       count = 0;
+=======
+    //$findElement.find('img').attr('src', $(this).find('img').attr('src'));
+    function init($th){
+>>>>>>> Stashed changes
       $countElement = $('.img-popup-layer.count span');
-      images = new Array();
+      images;
       commentId = $th.attr('id');
       count = $th.siblings('.img_count').text();
       $countElement.text('1 / ' + count);
@@ -63,11 +70,12 @@
         url: '/api/comments/pictures/' + commentId,
         contentType: 'application/json',
         success: function(res) {
+          images = new Array();
           for (var i = 0; i < res.length; i++) {
             images[i] = res[i];
           }
           makeList(res);
-          bindtouchEvent();
+          //bindtouchEvent();
         }
       });
       $ulEle.css({
@@ -77,6 +85,7 @@
 
     function removeLi() {
       $ulEle.children().remove();
+      curImage = 0;
     }
 
     function makeList(res) {
@@ -92,29 +101,57 @@
       move = $ulEle.width();
       autoMoveSize = $ulEle.width() / 3;
     }
+<<<<<<< Updated upstream
 
 
     function bindtouchEvent() {
       $ulEle.on('mousedown touchstart', function(e) {
         isDragging = true;
 
+=======
+    
+     
+    //function bindtouchEvent(){
+
+      $findElement.on('mousedown touchstart', function(e) {
+        this.isDragging = true;
+        this.isDowning = true;
+>>>>>>> Stashed changes
         if (e.type == 'touchstart') {
           e = e.touches[0];
         }
+<<<<<<< Updated upstream
         curX = e.clientX;
         console.log('curX = ' + curX);
       });
       $ulEle.on('mousemove touchmove', function(e) {
         if (isDragging) {
+=======
+        //console.log($(this).find('ul'));
+        this.originOffset = $(this).find('ul').css('left').split('p')[0];
+        //console.log("down : "+this.originOffset);
+        this.curX = e.clientX - this.originOffset;
+        //console.log(e.clientX +"-"+ originOffset + "=" + curX);
+      }).bind(PopUpModule);
+
+      $findElement.on('mousemove touchmove', function(e) {
+        if (this.isDragging) {
+>>>>>>> Stashed changes
           if (e.type == 'touchmove') {
             e = e.touches[0];
           }
-          dX = e.clientX - curX;
+          this.dX = e.clientX - this.curX;
+          //console.log(this.dX +  "=" + e.clientX + "-" + this.curX );
           $ulEle.css({
+<<<<<<< Updated upstream
             "left": -curImage * 100 + (dX / 30) + "%"
+=======
+            "left": this.dX+"px"
+>>>>>>> Stashed changes
           });
 
         }
+<<<<<<< Updated upstream
       });
       $ulEle.on('dragstart', function() {
         return false;
@@ -141,10 +178,44 @@
 
     function imageMove(e) {
       var inDecre = -dX / Math.abs(dX);
+=======
+      }).bind(PopUpModule);
+
+      $ulEle.on('dragstart',function(){
+        return false;
+      });
+
+      $findElement.on('mouseup touchend', function(e) {
+        this.isDragging = false;
+        
+        this.dX = e.clientX - this.originOffset - this.curX;
+        console.log(this.dX +"="+e.clientX+"-"+this.originOffset+"-"+this.curX);
+        isDowning = false;
+        if (this.dX < -200 || 200 < this.dX ) {
+        
+          if(!imageMove(e))
+            return false;
+        } else{
+          console.log("?? : " + this.originOffset);
+          $ulEle.css({
+            "left": this.originOffset+"px"
+          });
+        }
+      }).bind(PopUpModule);
+    //}
+
+    function imageMove(e){
+      var inDecre = -dX/Math.abs(dX);
+      console.log("curImage : "+curImage + " inDecre= -" + dX + "/"+Math.abs(dX));
+>>>>>>> Stashed changes
       curImage += inDecre;
       if (curImage < count && curImage >= 0) {
         $countElement.text((curImage + 1) + ' / ' + count);
         isDragging = false;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         $ulEle.animate({
           "left": -curImage * 100 + "%"
         }, 'normal');
@@ -158,6 +229,8 @@
       if (e.type == 'mousemove') {
         e.preventDefault();
       }
+      originOffset = originOffset-inDecre*(move);
+      return true;
     }
   })();
 
