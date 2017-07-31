@@ -114,8 +114,11 @@
 <jsp:include page="include/handlebars-templates.jsp" flush="false" />
 <jsp:include page="include/popupImg.jsp" flush="false" />
 
+
 <script	src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/resources/js/node_modules/egjs/dist/pkgd/eg.pkgd.min.js"></script>
+<script src="/resources/js/CommnonJS.js"></script>
 <script src="/resources/js/reviewApp.js"></script>
 
 
