@@ -47,8 +47,8 @@ public class LoginController {
 		String state = new BigInteger(130, random).toString(32);
 		request.getSession().setAttribute("state", state);
 		String REQUEST_URL = "https://nid.naver.com/oauth2.0/authorize?client_id=" + NAVER_OAUTH_CLIENT_ID
-				+ "&response_type=code&redirect_uri=";
-		return "redirect:" + REQUEST_URL + CALLBACK_URL + "&state=" + state;
+				+ "&response_type=code&redirect_uri=" + CALLBACK_URL + "&state=" + state;
+		return "redirect:" + REQUEST_URL;
 	}
 
 	@GetMapping("/oauth2callback")
