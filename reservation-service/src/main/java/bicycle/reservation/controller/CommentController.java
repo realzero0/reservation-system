@@ -20,7 +20,7 @@ public class CommentController {
 	
 	@GetMapping("/{productId}/{limitNum}")
 	public Collection<CommentReadingDto> getAllAtFront(@PathVariable Integer productId, @PathVariable Integer limitNum) {
-		return commentService.getByCommentsProId(productId, 3*limitNum, REVIEW_MAIN_COUNT);
+		return commentService.getByCommentsProId(productId, 10*limitNum, REVIEW_MAIN_COUNT);
 	}
 	
 	@GetMapping("/pictures/{commentId}")
