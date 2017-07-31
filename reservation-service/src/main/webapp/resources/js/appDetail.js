@@ -7,7 +7,8 @@
   })();
   $('.bk_btn').on('click', function() {
     window.location.href = window.location.href + '/reserve'
-  })
+  });
+
   // 모듈 인스턴스화 필요
   var PopUpModule = (function() {
     var $findElement = $('.img-popup-layer.img-viewer');
