@@ -116,7 +116,6 @@
 
 <script	src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/resources/js/node_modules/egjs/dist/eg.js"></script>
 <script src="/resources/js/reviewApp.js"></script>
 
 
