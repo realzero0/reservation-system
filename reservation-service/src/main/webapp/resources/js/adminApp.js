@@ -10,6 +10,7 @@
       }
     });
   }
+  
 
   function modifyCategory(id, name) {
     $.ajax({

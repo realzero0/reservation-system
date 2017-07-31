@@ -49,6 +49,7 @@
             res[i].createDate = converter.convert(res[i].createDate);
             html = html + itemTemplate(res[i])
           }
+          $('.thumb').off('click');
           $('.list_short_review').append(html);
           PopUp($('.thumb'));
           getDataSize = res.length;
