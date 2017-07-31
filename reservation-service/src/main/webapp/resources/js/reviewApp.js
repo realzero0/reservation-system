@@ -2,16 +2,13 @@
   'use strict';
 
 
-  var PopUpModule = (function() {
+  function PopUpModule($thumb) {
     var $findElement = $('.img-popup-layer.img-viewer');
     var $ulEle = $findElement.find('ul');
-    var $thumb = $('.thumb');
 
     var $countElement;
-
     var itemSource = $('#popup-img-template').html();
     var itemTemplate = Handlebars.compile(itemSource);
-
     var isDragging = false;
     var curX;
     var originOffset;
@@ -23,7 +20,7 @@
     var move;
     var autoMoveSize;
     //$findElement.find('img').attr('src', $(this).find('img').attr('src'));
-    function initf($th){
+    function init($th){
       curImage = 0;
       count = 0;
       $countElement = $('.img-popup-layer.count span');
@@ -34,7 +31,7 @@
     }
 
     $thumb.on('click', function() {
-      initf($(this));
+      init($(this));
       console.log();
       $('div.img-popup-layer').show();
       popupImgList();
@@ -154,23 +151,12 @@
         e.preventDefault();
       }
     }
-  })();
+
+  }
 
 
 
 
-  var $reviewSection = $('.section_review_list');
-  $reviewSection.on('click', function(e) {
-    if (e.target.className === 'thumb') {
-      var commentId = $(e.target).attr('id');
-      GetDataModule.getData(commentId);
-    }
-  });
-  var $popupSection = $('.img-popup-layer.exit');
-  $popupSection.on('click', function(e) {
-      $('.img-popup-layer >li').empty();
-      $('.img-popup-layer').hide();
-  });
 
   var ConvertTimestampModule = (function() {
     var convert = function(timestamp) {
@@ -205,59 +191,10 @@
   })();
 
 
-  var GetDataModule = (function() {
 
 
 
-    var countElement = $('.img-popup-layer.count span');
-
-
-    function getData(commentId) {
-      var arr = [];
-      $.ajax({
-        type: 'GET',
-        url: '/api/comments/pictures/' + commentId,
-        contentType: 'application/json',
-        success: function(res) {
-          console.log("ajax요청성공");
-          for (var i = 0; i < res.length; i++) {
-            arr[i] = {
-              "fileLocation": res[i]
-            };
-          }
-          addTemplate(arr);
-
-          $('.img-popup-layer').show();
-        }
-      });
-      return arr;
-    }
-
-    function addTemplate(arr) {
-      var html = "";
-      var count = 0;
-      var popupSource = $("#popup-img-template").html();
-      var popupTemplate = Handlebars.compile(popupSource);
-      var findElement = $('.img-popup-layer');
-      var $list = findElement.find('ul');
-
-      for (var i = 0; i < arr.length; i++) {
-        arr[i].fileLocation = 'http://220.230.122.151/img/' + arr[i].fileLocation;
-        html = html + popupTemplate(arr[i]);
-        count++;
-      }
-      countElement.text('1 / ' + count);
-      $list.append(html);
-    }
-    return {
-      getData: getData,
-      addTemplate: addTemplate
-    }
-
-  })();
-
-
-  var ajaxGetData = (function() {
+  var AjaxGetData = (function() {
     var limitCount = 0;
     var productId = window.location.href.split("/")[4];
     var itemSource = $("#comment-template").html();
@@ -273,11 +210,12 @@
           console.log(limitCount + "번째 요청 전달");
           for (var i = 0; i < res.length; i++) {
             res[i].score = res[i].score * 5 + ".0";
-            res[i].username = res[i].username.substr(0, 2) + "***";
+            res[i].username = res[i].username + "***";
             res[i].createDate = (ConvertTimestampModule.convert(res[i].createDate));
             html = html + itemTemplate(res[i])
           }
           $('.list_short_review').append(html);
+          PopUpModule($('.thumb'));
           getDataSize = res.length;
         }
       });
@@ -295,7 +233,6 @@
         console.log("데이터 수신멈춰");
       }
     };
-
     return {
       getOffers: getOffers,
       setCount: setCount,
@@ -303,13 +240,13 @@
     }
   })();
 
-  ajaxGetData.getOffers();
+  AjaxGetData.getOffers();
   $(document).scroll(function() {
     var maxHeight = $(document).height();
     var currentScroll = $(window).scrollTop() + $(window).height();
     if (maxHeight <= currentScroll + 10) {
-      ajaxGetData.setCount(ajaxGetData.getCount() + 1);
-      ajaxGetData.getOffers();
+      AjaxGetData.setCount(AjaxGetData.getCount() + 1);
+      AjaxGetData.getOffers();
     }
   });
 
