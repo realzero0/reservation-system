@@ -3950,19 +3950,19 @@ button {
 
 .img-popup-layer .img-viewer img {
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 .img-popup-layer .img-viewer ul {
   width: 100%;
+  height: 100%;
   white-space: nowrap;
   display: -webkit-box;
   position: relative;
 }
 .img-popup-layer .img-viewer ul li{
   width: 90%;
-  height: auto;
+  height: 100%;
   margin-left: 5%;
   margin-right: 5%;
 }
-
