@@ -54,7 +54,6 @@
     }
 
     $thumb.on('click', function(e) {
-      e.preventDefault();
       init($(this));
       $('div.img-popup-layer').show();
       popupImgList();
