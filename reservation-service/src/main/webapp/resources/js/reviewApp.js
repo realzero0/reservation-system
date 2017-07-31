@@ -1,9 +1,6 @@
 (function(window) {
     'use strict';
 
-
-
-
     function imageMove(e) {
       var inDecre = -dX / Math.abs(dX);
       curImage += inDecre;
