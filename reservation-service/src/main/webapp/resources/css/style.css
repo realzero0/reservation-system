@@ -3913,7 +3913,7 @@ button {
   height: 10%;
 }
 .img-popup-layer .exit {
-  display: block;
+  display: inline-block;
   color: white;
   z-index: 9001;
   width: auto;
@@ -3925,9 +3925,9 @@ button {
 }
 
 .img-popup-layer .count {
-  display: block;
-  top: 15%;
-  left: 85%;
+  display: inline-block;
+  top: 35%;
+  left: 80%;
   width: auto;
   height: 50px;
   z-index: 9001;
