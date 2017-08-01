@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -19,13 +21,13 @@
 				<div class="section_visual">
 					<header>
 						<h1 class="logo">
-							<a href="#" class="lnk_logo" title="네이버"> <span
+							<a href="http://naver.com" class="lnk_logo" title="네이버"> <span
 								class="spr_bi ico_n_logo">네이버</span>
-							</a> <a href="#" class="lnk_logo" title="예약"> <span
+							</a> <a href="/" class="lnk_logo" title="예약"> <span
 								class="spr_bi ico_bk_logo">예약</span>
 							</a>
 						</h1>
-						<a href="#" class="btn_my"> <span title="내 예약">MY</span>
+						<a href="/booked/list" class="btn_my"> <span title="내 예약">MY</span>
 						</a>
 					</header>
 					<div class="pagination">
@@ -40,7 +42,7 @@
 								<ul class="visual_img">
 									<li class="item" style="width: 414px;"><img alt=""
 										class="img_thumb"
-										src="/resources/img/poster/${productDto.saveFileName}.jpg"> <span
+										src="http://220.230.122.151/img/${productDto.fileId}"> <span
 										class="img_bg"></span>
 										<div class="visual_txt">
 											<div class="visual_txt_inn">
@@ -54,10 +56,10 @@
 									<c:forEach var="image" items="${productImages}" begin="1">
 										<li class="item" style="width: 414px;"><img alt=""
 											class="img_thumb"
-											src="/resources/img/poster/${image.saveFileName}.jpg">
-											<span class="img_bg"></span></li>
+											src="http://220.230.122.151/img/${image.fileId}"> <span
+											class="img_bg"></span></li>
 									</c:forEach>
-									
+
 								</ul>
 							</div>
 							<div class="prev">
@@ -78,19 +80,20 @@
 					</div>
 					<div class="group_btn_goto">
 						<c:if test="${!empty productDto.homepage}">
-						<a class="btn_goto_home" title="홈페이지" href="${productDto.homepage}" target="siteUrl">
-							<i class="fn fn-home1"></i>
-						</a>
+							<a class="btn_goto_home" title="홈페이지"
+								href="${productDto.homepage}" target="siteUrl"> <i
+								class="fn fn-home1"></i>
+							</a>
 						</c:if>
 						<c:if test="${!empty productDto.tel}">
-						<a class="btn_goto_tel" title="${productDto.tel}" href="#"> <i
-							class="fn fn-call1"></i>
-						</a>
+							<a class="btn_goto_tel" title="${productDto.tel}" href="#"> <i
+								class="fn fn-call1"></i>
+							</a>
 						</c:if>
-						<!-- 
+						<!--
 						<a class="btn_goto_mail" title="이메일" href="#"> <i
 							class="fn fn-mail1"></i>
-						</a> 
+						</a>
 						 -->
 						<a href="#" class="btn_goto_path" title="길찾기"> <i
 							class="fn fn-path-find1"></i>
@@ -140,67 +143,41 @@
 							<div class="grade_area">
 								<!-- [D] 별점 graph_value는 퍼센트 환산하여 width 값을 넣어줌 -->
 								<span class="graph_mask"> <em class="graph_value"
-									style="width: 84%;"></em>
-								</span> <strong class="text_value"> <span>4.2</span> <em
-									class="total">5.0</em>
-								</strong> <span class="join_count"><em class="green">52건</em> 등록</span>
+									style="width: ${avgScore}%;"></em>
+								</span> <strong class="text_value"> <span>${avgScore / 20}</span>
+									<em class="total">5.0</em>
+								</strong> <span class="join_count"><em class="green">${commentCount}건</em>
+									등록</span>
 							</div>
 							<ul class="list_short_review">
-								<li class="list_item">
-									<div>
-										<div class="review_area">
-											<div class="thumb_area">
-												<a href="#" class="thumb" title="이미지 크게 보기"> <img
-													width="90" height="90" class="img_vertical_top"
-													src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300"
-													alt="리뷰이미지">
-												</a> <span class="img_count">1</span>
+								<c:forEach var="comment" items="${comments}">
+									<li class="list_item">
+										<div>
+											<div class="review_area">
+												<c:if test="${!empty comment.fileIds}">
+													<div class="thumb_area">
+														<a href="#" id="${comment.commentId}" class="thumb"
+															title="이미지 크게 보기"> <img width="90" height="90"
+															class="img_vertical_top" src="http://220.230.122.151/img/${comment.fileIds[0]}"
+															alt="리뷰이미지">
+														</a> <span class="img_count">${fn:length(comment.fileIds)}</span>
+													</div>
+												</c:if>
+												<h4 class="resoc_name">${comment.productName}</h4>
+												<p class="review">${comment.comment}</p>
 											</div>
-											<h4 class="resoc_name">뮤지컬 로미오와 줄리엣</h4>
-											<p class="review">2층이어서 걱정했는데 꽤잘보여서 좋았습니다 고미오 너무 멋있었습니다
-												사진은 커튼콜때 찍었습니다 끝나고 퇴근길도 봐서 너무 좋았어요</p>
-										</div>
-										<div class="info_area">
-											<div class="review_info">
-												<span class="grade">4.0</span> <span class="name">dbfl****</span>
-												<span class="date">2017.3.5. 방문</span>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="list_item">
-									<div>
-										<div class="review_area no_img">
-											<h4 class="resoc_name">뮤지컬 로미오와 줄리엣</h4>
-											<p class="review">
-												너무 재밌게봤구요~<br>마지막공연 후 뒷풀이도 잘봤습니다
-											</p>
-										</div>
-										<div class="info_area">
-											<div class="review_info">
-												<span class="grade">5.0</span> <span class="name">yyck****</span>
-												<span class="date">2017.3.5. 방문</span>
+											<div class="info_area">
+												<div class="review_info">
+													<span class="grade">${comment.score * 5}</span> <span
+														class="name">${comment.username}****</span> <span
+														class="date"><fmt:formatDate
+															value="${comment.createDate}" pattern="yyyy. M. d." />
+														방문</span>
+												</div>
 											</div>
 										</div>
-									</div>
-								</li>
-								<li class="list_item">
-									<div>
-										<div class="review_area no_img">
-											<h4 class="resoc_name">뮤지컬 로미오와 줄리엣</h4>
-											<p class="review">
-												좋은 공연이었습니다. <br>머큐쇼역활 하신분의 열창이 기억에 남는 반면에,,, 로미오는 별로
-												기억에 남지 않네요..
-											</p>
-										</div>
-										<div class="info_area">
-											<div class="review_info">
-												<span class="grade">4.0</span> <span class="name">xero****</span>
-												<span class="date">2017.3.4. 방문</span>
-											</div>
-										</div>
-									</div>
-								</li>
+									</li>
+								</c:forEach>
 							</ul>
 						</div>
 						<p class="guide">
@@ -208,9 +185,11 @@
 								이용자가 남긴 평가입니다.</span>
 						</p>
 					</div>
-					<a class="btn_review_more" href="#"> <span>예매자 한줄평 더보기</span> <i
-						class="fn fn-forward1"></i>
-					</a>
+					<c:if test="${commentCount > 3}">
+						<a class="btn_review_more" href="${productDto.id}/reviews"> <span>예매자
+								한줄평 더보기</span> <i class="fn fn-forward1"></i>
+						</a>
+					</c:if>
 				</div>
 				<div class="section_info_tab">
 					<!-- [D] tab 선택 시 anchor에 active 추가 -->
@@ -243,13 +222,14 @@
 												src="https://ssl.phinf.net/naverbooking/20170131_238/14858250829398Pnx6_JPEG/%B0%F8%C1%F6%BB%E7%C7%D7.jpg?type=a1000">
 											</li>
 										</ul></li>
+										-->
 									<li class="detail_info_lst"><strong class="in_tit">[공연정보]</strong>
 										<ul class="in_img_group">
 											<li class="in_img_lst"><img alt="" class="img_thumb"
-												data-lazy-image="https://ssl.phinf.net/naverbooking/20170131_255/1485825099482NmYMe_JPEG/%B0%F8%BF%AC%C1%A4%BA%B8.jpg?type=a1000">
+												data-original="https://ssl.phinf.net/naverbooking/20170131_255/1485825099482NmYMe_JPEG/%B0%F8%BF%AC%C1%A4%BA%B8.jpg?type=a1000">
 											</li>
-										</ul></li>-->
-
+										</ul>
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -257,29 +237,36 @@
 					<!-- [D] 오시는길 외 다른 탭 선택 시 detail_location에 hide 추가 -->
 					<div class="detail_location hide">
 						<div class="box_store_info no_topline">
-							<a href="#" class="store_location" title="지도웹으로 연결"> <img
-								class="store_map img_thumb" alt="map"
-								src="https://simg.pstatic.net/static.map/image?version=1.1&amp;crs=EPSG:4326&amp;baselayer=bl_vc_bg&amp;exception=xml&amp;scale=2&amp;caller=mw_smart_booking&amp;overlayers=ol_vc_an&amp;center=127.0011948,37.5717079&amp;markers=type,default2,127.0011948,37.5717079&amp;level=11&amp;w=340&amp;h=150">
-								<span class="img_border"></span> <span class="btn_map"><i
+							<a
+								href="http://map.naver.com/index.nhn?query=${productDto.placeStreet}"
+								class="store_location" title="지도웹으로 연결">
+								<div id="store_map" data-address="${productDto.placeStreet}"
+									style="width: 374px; height: 340px;"></div> <span
+								class="img_border"></span> <span class="btn_map"><i
 									class="spr_book2 ico_mapview"></i></span>
 							</a>
-							<h3 class="store_name">엔에이치엔티켓링크(주)</h3>
+							<h3 class="store_name">${productDto.placeName}</h3>
 							<div class="store_info">
 								<div class="store_addr_wrap">
 									<span class="fn fn-pin2"></span>
-									<p class="store_addr store_addr_bold">서울특별시 종로구 종로33길 15</p>
-									<p class="store_addr">
-										<span class="addr_old">지번</span> <span class="addr_old_detail">서울특별시
-											종로구 연지동 270 </span>
-									</p>
-									<p class="store_addr addr_detail">두산아트센터 연강홀</p>
+									<p class="store_addr store_addr_bold">${productDto.placeStreet}</p>
+									<c:if test="${!empty productDto.placeLot}">
+										<p class="store_addr">
+											<span class="addr_old">지번</span> <span
+												class="addr_old_detail">${productDto.placeLot}</span>
+										</p>
+									</c:if>
+									<c:if test="${!empty productDto.placeName}">
+										<p class="store_addr addr_detail">${productDto.placeName}</p>
+									</c:if>
 								</div>
 								<div class="lst_store_info_wrap">
 									<ul class="lst_store_info">
+
 										<li class="item"><span class="item_lt"> <i
 												class="fn fn-call2"></i> <span class="sr_only">전화번호</span>
-										</span> <span class="item_rt"> <a href="tel:02-548-0597"
-												class="store_tel">02-548-0597</a></span></li>
+										</span> <span class="item_rt"> <a href="tel:${productDto.tel}"
+												class="store_tel">${productDto.tel}</a></span></li>
 									</ul>
 								</div>
 							</div>
@@ -287,7 +274,7 @@
 							<div class="bottom_common_path column2">
 								<a href="#" class="btn_path"> <i class="fn fn-path-find2"></i>
 									<span>길찾기</span>
-								</a> <a hewf="#" class="btn_navigation before"> <i
+								</a> <a href="#" class="btn_navigation before"> <i
 									class="fn fn-navigation2"></i> <span>내비게이션</span>
 								</a>
 							</div>
@@ -309,9 +296,18 @@
 		</div>
 	</footer>
 	<div id="photoviwer"></div>
+	<jsp:include page="include/popupImg.jsp" flush="false" />
 </body>
-<script
-	src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=KGCa149JUmPYQhSpiWSn&submodules=geocoder"></script>
+<jsp:include page="include/handlebars-templates.jsp" flush="false" />
+<script src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/resources/js/node_modules/egjs/dist/pkgd/eg.pkgd.min.js"></script>
+<script src="/resources/js/node_modules/jquery-lazyload/jquery.lazyload.js"></script>
+
+<script	src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="/resources/js/CommonJS.js"></script>
 <script src="/resources/js/appDetail.js"></script>
 
+<!-- <script src="/resources/js/slide.js"></script> -->
 </html>

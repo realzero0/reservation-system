@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 
+
 <head>
 <jsp:include page="include/mainTitle.jsp" flush="false" />
 <link href="/resources/css/style.css" rel="stylesheet">
@@ -44,7 +45,7 @@
 												<p class="event_txt_adr"></p>
 												<p class="event_txt_dsc"></p>
 											</div>
-									</a>
+										</a>
 									</li>
 									<li class="item"
 										style="background-image: url(http://naverbooking.phinf.naver.net/20170119_48/1484802596907hmVDm_JPEG/image.jpg); width: 338px;">
@@ -55,7 +56,7 @@
 												<p class="event_txt_adr">대학로 쁘띠첼씨어터</p>
 												<p class="event_txt_dsc">네이버 예매시, 손크림/발크림(중 랜덤)을 드립니다</p>
 											</div>
-									</a>
+										</a>
 									</li>
 									<li class="item"
 										style="background-image: url(http://naverbooking.phinf.naver.net/20170209_66/1486628146913la6nC_JPEG/image.jpg); width: 338px;">
@@ -66,7 +67,7 @@
 												<p class="event_txt_adr"></p>
 												<p class="event_txt_dsc"></p>
 											</div>
-									</a>
+										</a>
 									</li>
 								</ul>
 							</div>
@@ -91,8 +92,6 @@
 								</c:otherwise>
 							</c:choose><span>${item.name}</span> </a></li>
 					</c:forEach>
-
-
 				</ul>
 			</div>
 			<div class="section_event_lst">
