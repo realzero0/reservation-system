@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -21,21 +22,21 @@
 					<ul class="summary_board">
 						<li class="item">
 							<!--[D] 선택 후 .on 추가 link_summary_board --> <a href="#"
-							class="link_summary_board on"> <i class="spr_book2 ico_book2"></i>
-								<em class="tit">전체</em> <span class="figure">4</span>
+							class="link_summary_board on" data-reservation-type="all"> <i class="spr_book2 ico_book2"></i>
+								<em class="tit">전체</em> <span class="figure">${fn:length(bookedLists)}</span>
 						</a>
 						</li>
-						<li class="item"><a href="#" class="link_summary_board">
-								<i class="spr_book2 ico_book_ss"></i> <em class="tit">이용예정</em>
-								<span class="figure">2</span>
+						<li class="item"><a href="#"
+							class="link_summary_board" data-reservation-type="_toUse"> <i class="spr_book2 ico_book_ss"></i>
+								<em class="tit">이용예정</em> <span class="figure">${fn:length(bookedLists0) + fn:length(bookedLists1)}</span>
 						</a></li>
-						<li class="item"><a href="#" class="link_summary_board">
-								<i class="spr_book2 ico_check"></i> <em class="tit">이용완료</em> <span
-								class="figure">1</span>
+						<li class="item"><a href="#"
+							class="link_summary_board" data-reservation-type="_completed"> <i class="spr_book2 ico_check"></i>
+								<em class="tit">이용완료</em> <span class="figure">${fn:length(bookedLists2)}</span>
 						</a></li>
-						<li class="item"><a href="#" class="link_summary_board">
-								<i class="spr_book2 ico_back"></i> <em class="tit">취소·환불</em> <span
-								class="figure">1</span>
+						<li class="item"><a href="#"
+							class="link_summary_board" data-reservation-type="_cancelled"> <i class="spr_book2 ico_back"></i>
+								<em class="tit">취소·환불</em> <span class="figure">${fn:length(bookedLists3)}</span>
 						</a></li>
 					</ul>
 				</div>
@@ -47,7 +48,7 @@
 						<ul class="list_cards" ng-if="bookedLists.length > 0">
 							<!--[D] 예약확정: .confirmed, 취소된 예약&이용완료: .used 추가 card -->
 							<c:if test="${!empty bookedLists0}">
-								<li class="card">
+								<li class="card _toUse">
 									<div class=link_booking_details>
 										<div class="card_header">
 											<div class="left"></div>
@@ -119,7 +120,7 @@
 								</li>
 							</c:if>
 							<c:if test="${!empty bookedLists1}">
-								<li class="card confirmed">
+								<li class="card confirmed _toUse">
 									<div class="link_booking_details">
 										<div class="card_header">
 											<div class="left"></div>
@@ -191,7 +192,7 @@
 								</li>
 							</c:if>
 							<c:if test="${!empty bookedLists2}">
-								<li class="card used">
+								<li class="card used _completed">
 									<div class="link_booking_details">
 										<div class="card_header">
 											<div class="left"></div>
@@ -262,7 +263,7 @@
 								</li>
 							</c:if>
 							<c:if test="${!empty bookedLists3}">
-								<li class="card used">
+								<li class="card used _cancelled">
 									<div class="link_booking_details">
 										<div class="card_header">
 											<div class="left"></div>
@@ -376,5 +377,7 @@
 </body>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/resources/js/node_modules/egjs/dist/pkgd/eg.pkgd.min.js"></script>
+<script src="/resources/js/CommonJS.js"></script>
 <script src="/resources/js/myreservationApp.js"></script>
 </html>
