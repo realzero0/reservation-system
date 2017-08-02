@@ -242,9 +242,11 @@
 																</em>
 															</div>
 															<div class="booking_cancel">
-																<button class="btn">
-																	<span>예매자 리뷰 남기기</span>
-																</button>
+																<a href = "/review/write?bookingNumber=${bookedList.bookingNumber}" >
+																	<button class="btn">
+																		<span>예매자 리뷰 남기기</span>
+																	</button>
+																</a>
 															</div>
 														</div>
 													</div>
@@ -359,10 +361,10 @@
 			</div>
 			<div class="pop_bottom_btnarea">
 				<div class="btn_gray">
-					<a href="#" class="btn_bottom"><span>아니오</span></a>
+					<a href="#" class="btn_bottom _cancel"><span>아니오</span></a>
 				</div>
 				<div class="btn_green">
-					<a href="#" class="btn_bottom"><span>예</span></a>
+					<a href="#" class="btn_bottom _confirm"><span>예</span></a>
 				</div>
 			</div>
 			<!-- 닫기 -->
