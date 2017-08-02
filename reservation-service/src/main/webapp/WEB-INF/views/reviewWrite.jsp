@@ -116,6 +116,7 @@
 </body>
 <jsp:include page="include/handlebars-templates.jsp" flush="false" />
 <script	src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/resources/js/reviewWriteApp.js"></script>

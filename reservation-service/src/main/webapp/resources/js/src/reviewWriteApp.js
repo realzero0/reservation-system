@@ -14,6 +14,7 @@ requirejs.config({
         handlebars: 'node_modules/handlebars/dist/handlebars.min'
     }
 });
+requirejs([])
 requirejs(['jquery', 'handlebars'], function($, handlebarsjs) {
       'use strict';
       var headModule = (function() {

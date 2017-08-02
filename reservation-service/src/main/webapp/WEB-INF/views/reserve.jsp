@@ -106,7 +106,6 @@
 												청소년
 												</c:when>
 											</c:choose>
-
 									</span>
 									</strong> <strong class="product_price"> <span class="price"
 										data-discount=""><fmt:formatNumber value="${price.price}" groupingUsed="true"/></span> <span class="price_type">원</span>

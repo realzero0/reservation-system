@@ -38,14 +38,6 @@ public class ReviewController {
 		return "review";
 	}
 
-	// 임시 리뷰 작성 페이지로 이동
-	@GetMapping("/tmpwrite")
-	public String tmpreview(HttpServletRequest request) {
-		Collection<Users> users = usersService.getAll();
-		request.setAttribute("users", users);
-		return "tmpreview";
-	}
-
 	@GetMapping("/write")
 	public String reviewWrite(@RequestParam(name = "bookingNumber") Integer bookingNumber, HttpServletRequest request)
 			throws Exception {
