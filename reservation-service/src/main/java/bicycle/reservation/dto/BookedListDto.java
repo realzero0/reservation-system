@@ -1,16 +1,24 @@
 package bicycle.reservation.dto;
 
-import java.util.*;
+import java.util.Date;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class BookedListDto {
+	@NotNull
 	Long userId;
+	@NotNull
 	Integer bookingNumber;
 	Integer productId;
 	String productName;
 	Date startDate;
 	Date endDate;
+	@Size(min=0 ,max=100)
 	Integer generalTicketCount;
+	@Size(min=0 ,max=100)
 	Integer youthTicketCount;
+	@Size(min=0 ,max=100)
 	Integer childTicketCount;
 	String placeName;
 	Integer commentId;

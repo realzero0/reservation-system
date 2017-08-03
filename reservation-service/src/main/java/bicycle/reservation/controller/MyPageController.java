@@ -29,7 +29,6 @@ public class MyPageController {
 
 	@GetMapping("/list")
 	public String list(HttpServletRequest request) {
-
 		Users user = (Users) request.getSession().getAttribute("user");
 		List<BookedListDto> bookedLists = reservationInfoService.getBookedListsByUserId(user.getId());
 		List<BookedListDto> bookedLists0 = new LinkedList<>();
@@ -57,7 +56,7 @@ public class MyPageController {
 		request.setAttribute("bookedLists1", bookedLists1);
 		request.setAttribute("bookedLists2", bookedLists2);
 		request.setAttribute("bookedLists3", bookedLists3);
-//			request.getSession().setAttribute("user", null);
+
 		return "myreservation";
 
 	}

@@ -47,4 +47,6 @@ public class ServletContextConfig extends WebMvcConfigurerAdapter {
 	    registry.addInterceptor(new LoginCheckInterceptor()).addPathPatterns("/booked/**").addPathPatterns("/exhibition/**");
 	    super.addInterceptors(registry);
     }
+    
+
 }

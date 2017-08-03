@@ -27,6 +27,7 @@ public class ReservationInfoDao {
 	public Integer insert(ReservationInfo reservationInfo) {
 		SqlParameterSource params = new BeanPropertySqlParameterSource(reservationInfo);
 		return insertAction.executeAndReturnKey(params).intValue();
+
 	}
 	
 	public List<ReservationInfo> selectReservationInfosByUserId(Long userId) {

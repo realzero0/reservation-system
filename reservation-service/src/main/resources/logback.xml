@@ -11,10 +11,9 @@
             </filter>
         </appender>
         <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <File>${LOGS_PATH}/reservationLog.log</File>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
                 <!-- daily rollover -->
-                <FileNamePattern>reservationLog.%d{yyyy-MM-dd}.log</FileNamePattern>
+                <FileNamePattern>${LOGS_PATH}/reservationLog.%d{yyyy-MM-dd}.log</FileNamePattern>
                 <!-- keep 30 days' worth of history -->
                 <maxHistory>30</maxHistory>         
             </rollingPolicy>
@@ -28,12 +27,12 @@
             <appender-ref ref="consoleAppender" />
         </logger>
         <!-- additivity = "ture" -->
-        <logger name="org.springframework" level="info">
+        <logger name="org.springframework" level="error">
             <appender-ref ref="dailyRollingFileAppender"/>
             <appender-ref ref="consoleAppender" />
         </logger>
         <root>
-            <level value="INFO" />
+            <level value="error" />
             <appender-ref ref="consoleAppender" />
         </root>
     </configuration>
