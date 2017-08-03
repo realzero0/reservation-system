@@ -9,6 +9,8 @@ import javax.servlet.http.*;
 
 import org.json.simple.*;
 import org.json.simple.parser.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +21,7 @@ import bicycle.reservation.service.*;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	// 프로퍼티는 static으로는 읽을 수 없다
 	@Value("${naver.login.callback.url}")
 	private String CALLBACK_URL;
@@ -43,6 +45,7 @@ public class LoginController {
 
 	@GetMapping
 	public String login(HttpServletRequest request) {
+		logger.info("==============Login 시작==============");
 		SecureRandom random = new SecureRandom();
 		String state = new BigInteger(130, random).toString(32);
 		request.getSession().setAttribute("state", state);
@@ -54,13 +57,16 @@ public class LoginController {
 	@GetMapping("/oauth2callback")
 	public String oauth2Callback(@RequestParam String state, @RequestParam String code, HttpServletRequest request)
 			throws UnsupportedEncodingException {
+		logger.info("==============Login Callback 시작==============");
 		String storedState = (String) request.getSession().getAttribute("state"); // 세션에
 		if (!state.equals(storedState)) {
+			logger.error("==============세션 State 불일치==============");
 			// 세션에 저장된 토큰과 인증을 요청해서 받은 토큰이 일치하는지 검증
 			// System.out.println("401 unauthorized"); // 인증이 실패했을 때의 처리 부분입니다.
 			return "redirect:/";
 		}
 		// 성공한 부분
+
 		String data = userService.getHtml(getAccessUrl(state, code), null);
 		Map<String, String> map = userService.JSONStringToMap(data);
 		String accessToken = map.get("access_token");
@@ -73,6 +79,7 @@ public class LoginController {
 		try {
 			responseData = (JSONObject) jsonParser.parse(profileData);
 		} catch (ParseException e) {
+			logger.error("==============JsonParser 오류==============");
 			e.printStackTrace();
 		}
 		Map<String, String> userMap = userService.JSONStringToMap(responseData.get("response").toString());
@@ -80,6 +87,7 @@ public class LoginController {
 		if (userService.getUserBySnsId(userMap.get("id")) != null) {
 			request.getSession().invalidate();
 			request.getSession().setAttribute("user", userService.getUserBySnsId(userMap.get("id")));
+			logger.info("==============User 로그인 성공==============");
 			return "redirect:" + returnUrl;
 		} else {
 			Users user = new Users();
@@ -90,6 +98,7 @@ public class LoginController {
 			user.setNickname(userMap.get("nickname"));
 			user.setAdminFlag(0);
 			userService.addUser(user);
+			logger.info("==============User : "+user.getSnsId()+" 생성==============");
 			return "redirect:" + returnUrl;
 		}
 	}

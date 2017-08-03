@@ -6,6 +6,8 @@ import java.util.*;
 
 import javax.servlet.http.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +19,7 @@ import bicycle.reservation.service.*;
 @Controller
 @RequestMapping("/poster")
 public class PosterFileController {
-	
+	private static final Logger logger = LoggerFactory.getLogger(PosterFileController.class);
 	
 	@Autowired
 	FileService fileService;
@@ -30,6 +32,7 @@ public class PosterFileController {
 	@PostMapping
 	public String create(@RequestParam("productid") Integer productId, @RequestParam("file") MultipartFile[] files) {
 		String baseDir = fileService.getBaseDir();
+		logger.info("==============File 생성 시작==============");
 		if (files != null && files.length > 0) {
 
 			// windows 사용자라면 "c:\boost\storage\년도\월\일" 형태의 문자열을 구한다.
@@ -71,11 +74,12 @@ public class PosterFileController {
 						fos.write(buffer, 0, readCount);
 					}
 				} catch (Exception e) {
+					logger.error("==============File : "+originalFilename+" 생성 오류==============");
 					e.printStackTrace();
 				}
 			} // for
 		} // if
-
+		logger.info("==============File 생성 성공==============");
 		return "redirect:/poster";
 	}
 

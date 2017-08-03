@@ -25,36 +25,35 @@ import bicycle.reservation.service.ReservationInfoService;
 
 @Controller
 @RequestMapping("/exhibition")
-public class ReserveController extends WebMvcConfigurerAdapter{
-	private static final Logger logger = LoggerFactory.getLogger(ReserveController.class);
-	@Autowired
-	private ProductService productDtoService;
+public class ReserveController extends WebMvcConfigurerAdapter {
+    private static final Logger logger = LoggerFactory.getLogger(ReserveController.class);
+    @Autowired
+    private ProductService productDtoService;
 
-	@Autowired
-	private ReservationInfoService reservationInfoService;
+    @Autowired
+    private ReservationInfoService reservationInfoService;
 
-	@GetMapping("/{productId}/reserve")
-	public String reserveProduct(@PathVariable Integer productId, HttpServletRequest request) {		
-		// request.getSession().setAttribute("user", null);
-		ProductDto productDto = productDtoService.getByProductId(productId);
-		List<ProductPrice> prices = productDtoService.getProductPricesByProductId(productId);
-		request.setAttribute("product", productDto);
-		request.setAttribute("prices", prices);
-		return "reserve";
-	}
+    @GetMapping("/{productId}/reserve")
+    public String reserveProduct(@PathVariable Integer productId, HttpServletRequest request) {
+        // request.getSession().setAttribute("user", null);
+        ProductDto productDto = productDtoService.getByProductId(productId);
+        List<ProductPrice> prices = productDtoService.getProductPricesByProductId(productId);
+        request.setAttribute("product", productDto);
+        request.setAttribute("prices", prices);
+        return "reserve";
+    }
 
-	@PostMapping("/{productId}/reserve")
-	public String reserve(@PathVariable Integer productId,@Valid ReservationInfo reservationInfo, BindingResult bindingResult ) {
-		logger.info("==============Reserve 시작==============");
-		if(bindingResult.hasErrors()){
-			logger.error("=============Reserve 실패==============");
-			return "redirect:/";
-		}
-		reservationInfoService.addReservationInfo(reservationInfo);
-		logger.info("==============Reserve 성공==============");
-		return "redirect:/"; // 성공 부분
-	}
+    @PostMapping("/{productId}/reserve")
+    public String reserve(@PathVariable Integer productId, @Valid ReservationInfo reservationInfo, BindingResult bindingResult) {
+        logger.info("==============Reserve 시작==============");
+        if (bindingResult.hasErrors()) {
+            logger.error("=============Reserve 실패==============");
+            return "redirect:/";
+        }
+        reservationInfoService.addReservationInfo(reservationInfo);
+        logger.info("==============Reserve 성공==============");
+        return "redirect:/"; // 성공 부분
+    }
 
-	
 
 }

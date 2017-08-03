@@ -4,6 +4,8 @@ import java.io.*;
 
 import javax.servlet.http.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.util.*;
@@ -15,14 +17,14 @@ import bicycle.reservation.service.*;
 @Controller
 @RequestMapping("/img")
 public class ImageLoadingController {
-	
+	private static final Logger logger = LoggerFactory.getLogger(ImageLoadingController.class);
 	@Autowired
 	FileService fileService;
 	
 	@GetMapping("/{fileId}")
 	public void downloadReservationUserCommentImage(@PathVariable(name = "fileId") Integer fileId,
 			HttpServletResponse response) {
-		
+		logger.info("==============파일 로딩 시작==============");
 		ImageDto image = fileService.getImageByFileId(fileId);
 		// id를 이용하여 파일의 정보를 읽어온다.
 		// 이 부분은 원래 db에서 읽어오는 것인데 db부분은 생략했다.
@@ -52,14 +54,16 @@ public class ImageLoadingController {
 																	// 사용할 수 있다.
 			response.getOutputStream().flush();
 		} catch (Exception ex) {
+			logger.error("==============파일 : "+originalFilename+" 로딩 오류==============");
 			throw new RuntimeException(ex);
 		} finally {
 			try {
 				fis.close();
 			} catch (Exception ex) {
+				logger.error("==============파일 : "+ originalFilename +" close 오류==============");
 				// 아무것도 하지 않음 (필요한 로그를 남기는 정도의 작업만 함.)
 			}
 		}
-
+		logger.error("==============파일 : "+ originalFilename + " 로딩 성공==============");
 	}
 }

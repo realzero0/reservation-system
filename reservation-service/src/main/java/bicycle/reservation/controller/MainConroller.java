@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.servlet.http.*;
 
+import bicycle.reservation.security.AuthUser;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,11 @@ public class MainConroller {
 	private ReservationUserCommentService commentService;
 
 	@GetMapping
-	public String index(HttpServletRequest request) {
+	public String index(@AuthUser Map<String, String> user,  HttpServletRequest request) {
+		for(String str : user.keySet()){
+			System.out.println(str + " " + user.get(str));
+		}
+		System.out.println(user);
 		Collection<Category> categories = categoryService.getAll();
 		request.setAttribute("categories", categories);
 		return "index";
