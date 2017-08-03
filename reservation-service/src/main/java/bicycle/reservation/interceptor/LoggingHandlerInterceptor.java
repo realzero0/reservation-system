@@ -3,12 +3,15 @@ package bicycle.reservation.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class LoggingHandlerInterceptor extends HandlerInterceptorAdapter {
     private static final String ATTRIBUTE_BEGIN_TIME = "ATTR_BEGIN_TIME";
-
+    private static final Logger logger = LoggerFactory.getLogger(LoggingHandlerInterceptor.class);
+    
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
@@ -31,7 +34,8 @@ public class LoggingHandlerInterceptor extends HandlerInterceptorAdapter {
         stringBuilder.append(System.currentTimeMillis() - beginTime);
         stringBuilder.append(" ms");
 
-        System.out.println(stringBuilder.toString());
+
+        logger.info("메소드 실행 시간 {}", stringBuilder.toString());
 
         super.postHandle(request, response, handler, modelAndView);
     }
