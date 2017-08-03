@@ -401,5 +401,6 @@
 
 </body>
 <script src="/resources/js/node_modules/requirejs/require.js"></script>
-<script src="/resources/js/myreservationApp.js"></script>
+
+<script src="/resources/js/dist/myreservation.js"></script>
 </html>

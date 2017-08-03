@@ -12,3 +12,10 @@ gulp.task('bicycle-combine-js', [], function () {
         .pipe(gulp.dest('dist'));
 });
 
+gulp.task('bicycle-myreservation-combine-js', [], function(){
+  return gulp.src(['myreservationApp.js'])
+  .pipe(stripDebug())
+  .pipe(uglify())
+  .pipe(concat('myreservation.js'))
+  .pipe(gulp.dest('dist'));
+})
