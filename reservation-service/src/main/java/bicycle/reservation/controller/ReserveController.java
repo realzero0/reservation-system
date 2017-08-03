@@ -23,18 +23,13 @@ public class ReserveController {
 	private ReservationInfoService reservationInfoService;
 
 	@GetMapping("/{productId}/reserve")
-	public String reserveProduct(@PathVariable Integer productId, HttpServletRequest request) {
-		if (request.getSession().getAttribute("user") != null) {
-			// request.getSession().setAttribute("user", null);
-			ProductDto productDto = productDtoService.getByProductId(productId);
-			List<ProductPrice> prices = productDtoService.getProductPricesByProductId(productId);
-			request.setAttribute("product", productDto);
-			request.setAttribute("prices", prices);
-			return "reserve";
-		} else {
-			request.getSession().setAttribute("returnUrl", request.getRequestURL());
-			return "redirect:/login";
-		}
+	public String reserveProduct(@PathVariable Integer productId, HttpServletRequest request) {		
+		// request.getSession().setAttribute("user", null);
+		ProductDto productDto = productDtoService.getByProductId(productId);
+		List<ProductPrice> prices = productDtoService.getProductPricesByProductId(productId);
+		request.setAttribute("product", productDto);
+		request.setAttribute("prices", prices);
+		return "reserve";
 	}
 
 	@PostMapping("/{productId}/reserve")

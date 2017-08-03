@@ -1,16 +1,20 @@
 package bicycle.reservation.controller;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.*;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import bicycle.reservation.domain.*;
-import bicycle.reservation.dto.*;
-import bicycle.reservation.service.*;
+import bicycle.reservation.dto.BookedListDto;
+import bicycle.reservation.service.ReservationInfoService;
+import bicycle.reservation.service.UsersService;
 
 @Controller
 @RequestMapping("/booked")
@@ -62,12 +66,8 @@ public class MyPageController {
 	
 	@PostMapping("/cancel")
 	public String cancelReservation(@RequestParam(name = "bookingNumber") Integer bookingNumber, HttpServletRequest request) throws Exception {
-		if (request.getSession().getAttribute("user") != null) {
-			reservationInfoService.updateReservationTypeToCancelledByBookingNumber(bookingNumber);
-			return "success";
-		} else {
-			throw new Exception();
-		}
+		reservationInfoService.updateReservationTypeToCancelledByBookingNumber(bookingNumber);
+		return "success";
 	}
 	
 }

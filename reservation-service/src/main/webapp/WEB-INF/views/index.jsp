@@ -122,5 +122,7 @@
 <jsp:include page="include/handlebars-templates.jsp" flush="false" />
 <script	src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
+<script	src="/resources/js/node_modules/requirejs/require.js"></script>
+
 <script src="/resources/js/app.js"></script>
 </html>
