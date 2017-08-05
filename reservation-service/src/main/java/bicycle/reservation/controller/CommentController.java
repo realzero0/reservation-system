@@ -18,31 +18,31 @@ import bicycle.reservation.service.ReservationUserCommentService;
 @RestController
 @RequestMapping("/api/comments")
 public class CommentController {
-	private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
-	private static final Integer REVIEW_MAIN_COUNT = 3;
-	@Autowired
-	ReservationUserCommentService commentService;
+    private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
+    private static final Integer REVIEW_MAIN_COUNT = 3;
+    @Autowired
+    ReservationUserCommentService commentService;
 
-	@Autowired
-	FileService fileService;
+    @Autowired
+    FileService fileService;
 
-	@GetMapping("/{productId}/{limitNum}")
-	public List<CommentReadingDto> getAllAtFront(@PathVariable Integer productId, @PathVariable Integer limitNum) {
-		logger.info("==============모든 Comment 로딩 시작==============");
-		List<CommentReadingDto> commentReadingDto;
-		try {
-			commentReadingDto = (List<CommentReadingDto>) commentService.getByCommentsProId(productId, 10 * limitNum, REVIEW_MAIN_COUNT);
-			logger.info("==============모든 Comment 로딩 성공==============");
-			
-		} catch (Exception e) {
-			logger.info("==============모든 Comment 로딩 실패==============");
-			return null;
-		}
-		return commentReadingDto;
-	}
+    @GetMapping("/{productId}/{limitNum}")
+    public List<CommentReadingDto> getAllAtFront(@PathVariable Integer productId, @PathVariable Integer limitNum) {
+        logger.info("==============모든 Comment 로딩 시작==============");
+        List<CommentReadingDto> commentReadingDto;
+        try {
+            commentReadingDto = (List<CommentReadingDto>) commentService.getByCommentsProId(productId, 10 * limitNum, REVIEW_MAIN_COUNT);
+            logger.info("==============모든 Comment 로딩 성공==============");
 
-	@GetMapping("/pictures/{commentId}")
-	public Collection<Integer> getCommentPictureCount(@PathVariable Integer commentId) {
-		return fileService.getImagesByCommentId(commentId);
-	}
+        } catch (Exception e) {
+            logger.info("==============모든 Comment 로딩 실패==============");
+            return null;
+        }
+        return commentReadingDto;
+    }
+
+    @GetMapping("/pictures/{commentId}")
+    public Collection<Integer> getCommentPictureCount(@PathVariable Integer commentId) {
+        return fileService.getImagesByCommentId(commentId);
+    }
 }
